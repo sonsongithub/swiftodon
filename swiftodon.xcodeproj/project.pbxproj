@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */ = {isa = PBXBuildFile; fileRef = 144ECFBB1EAB2D98003E36E3 /* MastodonKit */; };
+		144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */; };
 		1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */; };
 		1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20F1EAA1BCC00867E62 /* ViewController.swift */; };
 		1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2111EAA1BCC00867E62 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		144ECFBB1EAB2D98003E36E3 /* MastodonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MastodonKit; path = vendor/MastodonKit/Sources/MastodonKit; sourceTree = "<group>"; };
+		144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		1450A20A1EAA1BCC00867E62 /* swiftodon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftodon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1450A20F1EAA1BCC00867E62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,7 @@
 		1450A2011EAA1BCC00867E62 = {
 			isa = PBXGroup;
 			children = (
+				144ECFBB1EAB2D98003E36E3 /* MastodonKit */,
 				1450A20C1EAA1BCC00867E62 /* swiftodon */,
 				1450A20B1EAA1BCC00867E62 /* Products */,
 			);
@@ -60,6 +65,7 @@
 				1450A2141EAA1BCC00867E62 /* Assets.xcassets */,
 				1450A2161EAA1BCC00867E62 /* LaunchScreen.storyboard */,
 				1450A2191EAA1BCC00867E62 /* Info.plist */,
+				144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */,
 			);
 			path = swiftodon;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */,
 				1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */,
 				1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */,
 				1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */,
@@ -138,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */,
+				144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */,
 				1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +312,7 @@
 				1450A21E1EAA1BCC00867E62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
