@@ -14,9 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print(#function)
-        print(url)
-        print(options)
+        if let query = url.query {
+            let entries = query.components(separatedBy: "&")
+            let dictionary: [String: String] = entries.reduce([:], { (result, string) -> [String: String] in
+                let components = string.components(separatedBy: "=")
+                guard components.count == 2 else { return result }
+                var temp = result
+                temp[components[0]] = components[1]
+                return temp
+            })
+            print(dictionary)
+            guard let code = dictionary["code"] else { return true }
+            print(code)
+        }
         return true
     }
 
