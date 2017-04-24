@@ -7,14 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */ = {isa = PBXBuildFile; fileRef = 144ECFBB1EAB2D98003E36E3 /* MastodonKit */; };
+		144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */; };
 		1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */; };
 		1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20F1EAA1BCC00867E62 /* ViewController.swift */; };
 		1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2111EAA1BCC00867E62 /* Main.storyboard */; };
 		1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2141EAA1BCC00867E62 /* Assets.xcassets */; };
 		1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2161EAA1BCC00867E62 /* LaunchScreen.storyboard */; };
+		14B64E4E1EAD4D46009940EA /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E461EAD4D17009940EA /* CommonCrypto.framework */; };
+		14B64E4F1EAD4D46009940EA /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E461EAD4D17009940EA /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14B64E501EAD4D46009940EA /* HTMLSpecialCharacters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */; };
+		14B64E511EAD4D46009940EA /* HTMLSpecialCharacters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14B64E521EAD4D46009940EA /* MiniKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E481EAD4D17009940EA /* MiniKeychain.framework */; };
+		14B64E531EAD4D46009940EA /* MiniKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E481EAD4D17009940EA /* MiniKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14B64E541EAD4D46009940EA /* UZTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E491EAD4D17009940EA /* UZTextView.framework */; };
+		14B64E551EAD4D46009940EA /* UZTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E491EAD4D17009940EA /* UZTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14B64E5A1EAD4E23009940EA /* MastodonSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B64E591EAD4E23009940EA /* MastodonSession.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		14B64E561EAD4D46009940EA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				14B64E4F1EAD4D46009940EA /* CommonCrypto.framework in Embed Frameworks */,
+				14B64E511EAD4D46009940EA /* HTMLSpecialCharacters.framework in Embed Frameworks */,
+				14B64E531EAD4D46009940EA /* MiniKeychain.framework in Embed Frameworks */,
+				14B64E551EAD4D46009940EA /* UZTextView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		144ECFBB1EAB2D98003E36E3 /* MastodonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MastodonKit; path = vendor/MastodonKit/Sources/MastodonKit; sourceTree = "<group>"; };
+		144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		1450A20A1EAA1BCC00867E62 /* swiftodon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftodon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1450A20F1EAA1BCC00867E62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +52,12 @@
 		1450A2141EAA1BCC00867E62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1450A2171EAA1BCC00867E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1450A2191EAA1BCC00867E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14B64E461EAD4D17009940EA /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/iOS/CommonCrypto.framework; sourceTree = "<group>"; };
+		14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLSpecialCharacters.framework; path = Carthage/Build/iOS/HTMLSpecialCharacters.framework; sourceTree = "<group>"; };
+		14B64E481EAD4D17009940EA /* MiniKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniKeychain.framework; path = Carthage/Build/iOS/MiniKeychain.framework; sourceTree = "<group>"; };
+		14B64E491EAD4D17009940EA /* UZTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UZTextView.framework; path = Carthage/Build/iOS/UZTextView.framework; sourceTree = "<group>"; };
+		14B64E591EAD4E23009940EA /* MastodonSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonSession.swift; sourceTree = "<group>"; };
+		14B64E5B1EAD51AC009940EA /* swiftodon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftodon.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B64E4E1EAD4D46009940EA /* CommonCrypto.framework in Frameworks */,
+				14B64E501EAD4D46009940EA /* HTMLSpecialCharacters.framework in Frameworks */,
+				14B64E521EAD4D46009940EA /* MiniKeychain.framework in Frameworks */,
+				14B64E541EAD4D46009940EA /* UZTextView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +78,10 @@
 		1450A2011EAA1BCC00867E62 = {
 			isa = PBXGroup;
 			children = (
+				144ECFBB1EAB2D98003E36E3 /* MastodonKit */,
 				1450A20C1EAA1BCC00867E62 /* swiftodon */,
 				1450A20B1EAA1BCC00867E62 /* Products */,
+				14B64E451EAD4D17009940EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +96,28 @@
 		1450A20C1EAA1BCC00867E62 /* swiftodon */ = {
 			isa = PBXGroup;
 			children = (
+				14B64E5B1EAD51AC009940EA /* swiftodon.entitlements */,
 				1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */,
 				1450A20F1EAA1BCC00867E62 /* ViewController.swift */,
 				1450A2111EAA1BCC00867E62 /* Main.storyboard */,
 				1450A2141EAA1BCC00867E62 /* Assets.xcassets */,
 				1450A2161EAA1BCC00867E62 /* LaunchScreen.storyboard */,
 				1450A2191EAA1BCC00867E62 /* Info.plist */,
+				144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */,
+				14B64E591EAD4E23009940EA /* MastodonSession.swift */,
 			);
 			path = swiftodon;
+			sourceTree = "<group>";
+		};
+		14B64E451EAD4D17009940EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14B64E461EAD4D17009940EA /* CommonCrypto.framework */,
+				14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */,
+				14B64E481EAD4D17009940EA /* MiniKeychain.framework */,
+				14B64E491EAD4D17009940EA /* UZTextView.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +130,7 @@
 				1450A2061EAA1BCC00867E62 /* Sources */,
 				1450A2071EAA1BCC00867E62 /* Frameworks */,
 				1450A2081EAA1BCC00867E62 /* Resources */,
+				14B64E561EAD4D46009940EA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -98,6 +155,14 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = JP866VWWSD;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -124,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */,
 				1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */,
 				1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */,
 				1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */,
@@ -138,6 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */,
+				144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */,
+				14B64E5A1EAD4E23009940EA /* MastodonSession.swift in Sources */,
 				1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,7 +331,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = swiftodon/swiftodon.entitlements;
 				DEVELOPMENT_TEAM = JP866VWWSD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = swiftodon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon;
@@ -276,7 +349,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = swiftodon/swiftodon.entitlements;
 				DEVELOPMENT_TEAM = JP866VWWSD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = swiftodon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon;
@@ -304,6 +382,7 @@
 				1450A21E1EAA1BCC00867E62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
