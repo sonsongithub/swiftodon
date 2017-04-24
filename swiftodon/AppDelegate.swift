@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let query = url.query {
+        if let query = url.query, let host = url.host {
             let entries = query.components(separatedBy: "&")
             let dictionary: [String: String] = entries.reduce([:], { (result, string) -> [String: String] in
                 let components = string.components(separatedBy: "=")
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(dictionary)
             guard let code = dictionary["code"] else { return true }
             print(code)
+            MastodonSession.tryToDownloadAccessToken(host: host, code: code)
         }
         return true
     }

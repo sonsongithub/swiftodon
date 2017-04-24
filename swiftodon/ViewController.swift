@@ -13,7 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MastodonSession.add(host: "mstdn.jp")
+//        let host = "mstdn.jp"
+        let host = "pawoo.net"
+        
+        do {
+            try MastodonSession.delete(host: host)
+        } catch {
+            print(error)
+        }
+        
+        MastodonSession.add(host: host)
         
 //        let redirect_uri = "swiftodon://mstdn.jp/"
 //        

@@ -21,7 +21,7 @@ struct MastodonSession {
     let clientID: String
     let clientSecret: String
     
-    static func get(host: String) {
+    static func tryToDownloadClientKeys(host: String) {
         
         let redirect_uri = "swiftodon://\(host)/"
         
@@ -49,52 +49,112 @@ struct MastodonSession {
         let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: request) { (data, response, error) in
             switch (data, response, error) {
             case (let data?, let response as HTTPURLResponse, _):
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                    guard let client_id = json["client_id"] as? String else { return }
-                    guard let client_secret = json["client_secret"] as? String else { return }
-                    try MastodonSession.save(host: host, clientID: client_id, clientSecret: client_secret)
-                } catch {
-                    print(error)
+                if 200..<300 ~= response.statusCode {
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                        guard let client_id = json["client_id"] as? String else { return }
+                        guard let client_secret = json["client_secret"] as? String else { return }
+                        try MastodonSession.save(host: host, clientID: client_id, clientSecret: client_secret)
+                        openBrowserForOAuth2(host: host, clientID: client_id)
+                    } catch {
+                        print(error)
+                    }
+                } else {
                 }
+            case (_, _, let error?):
+                print(error)
             default:
-                do {}
+                fatalError("Unexpected response from URLsession.")
             }
         }
         task.resume()
     }
     
     static func add(host: String) {
-        
         do {
-            let (clientID, clientSecret) = try MastodonSession.clientKeys(of: host)
+            let (clientID, _) = try MastodonSession.clientKeys(of: host)
+            openBrowserForOAuth2(host: host, clientID: clientID)
         } catch Status.itemNotFound {
-            get(host: host)
+            tryToDownloadClientKeys(host: host)
         } catch {
             print(error)
         }
-        
     }
     
-    static func openBrowserForOAuth2(host: String) {
-//        let parameters: [String: String] = [
-//            "client_id": client_id,
-//            "response_type": "code",
-//            "redirect_uri": redirect_uri
-//        ]
-//        
-//        let para: [(String, String)] = parameters.flatMap({
-//            guard let value = $0.1.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) else { return nil }
-//            return ($0.0, value)
-//        })
-//        let str = para.flatMap({"\($0.0)=\($0.1)"}).joined(separator: "&")
-//        
-//        let urlstring = "https://mstdn.jp/oauth/authorize?" + str
-//        
-//        if let url = URL(string: urlstring) {
-//            print(url)
-//            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//        }
+    static func tryToDownloadAccessToken(host: String, code: String) {
+        
+        
+        do {
+            let (clientID, clientSecret) = try MastodonSession.clientKeys(of: host)
+            
+            let redirect_uri = "swiftodon://\(host)/"
+            let parameters: [String: String] = [
+                "grant_type": "authorization_code",
+                "client_id": clientID,
+                "client_secret": clientSecret,
+                "redirect_uri": redirect_uri,
+                "code": code
+            ]
+            
+            let para: [(String, String)] = parameters.flatMap({
+                guard let value = $0.1.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) else { return nil }
+                return ($0.0, value)
+            })
+            let str = para.flatMap({"\($0.0)=\($0.1)"}).joined(separator: "&")
+            print(str)
+            
+            let data = str.data(using: .utf8)!
+            
+            let url = URL(string: "https://\(host)/oauth/token")!
+            
+            var request = URLRequest(url: url)
+            request.httpBody = data
+            request.httpMethod = "POST"
+            
+            let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: request) { (data, response, error) in
+                switch (data, response, error) {
+                case (let data?, let response as HTTPURLResponse, _):
+                    if 200..<300 ~= response.statusCode {
+                        do {
+                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                            print(json)
+                        } catch {
+                            print(error)
+                        }
+                    } else {
+                    }
+                case (_, _, let error?):
+                    print(error)
+                default:
+                    fatalError("Unexpected response from URLsession.")
+                }
+            }
+            task.resume()
+        } catch {
+            print(error)
+            return
+        }
+    }
+    
+    static func openBrowserForOAuth2(host: String, clientID: String) {
+        let redirect_uri = "swiftodon://\(host)/"
+        let parameters: [String: String] = [
+            "client_id": clientID,
+            "response_type": "code",
+            "scope": "read write follow",
+            "redirect_uri": redirect_uri
+        ]
+
+        let para: [(String, String)] = parameters.flatMap({
+            guard let value = $0.1.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) else { return nil }
+            return ($0.0, value)
+        })
+        let str = para.flatMap({"\($0.0)=\($0.1)"}).joined(separator: "&")
+
+        let urlstring = "https://\(host)/oauth/authorize?" + str
+        if let url = URL(string: urlstring) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     static func sessions() -> [MastodonSession] {
@@ -110,6 +170,11 @@ struct MastodonSession {
     
     static func save(host: String, code: String, userName: String) {
         
+    }
+    
+    static func delete(host: String) throws {
+        let keychain = MiniKeychain(service:"com.sonson.swiftodon.client")
+        keychain.delete(key: host)
     }
     
     static func save(host: String, clientID: String, clientSecret: String) throws {
