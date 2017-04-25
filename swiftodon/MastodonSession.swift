@@ -20,6 +20,7 @@ struct MastodonSession {
     let accessToken: String
     let clientID: String
     let clientSecret: String
+    let createdAt: TimeInterval
     
     static func tryToDownloadClientKeys(host: String) {
         
@@ -74,7 +75,7 @@ struct MastodonSession {
         do {
             let (clientID, _) = try MastodonSession.clientKeys(of: host)
             openBrowserForOAuth2(host: host, clientID: clientID)
-        } catch Status.itemNotFound {
+        } catch MiniKeychain.Status.itemNotFound {
             tryToDownloadClientKeys(host: host)
         } catch {
             print(error)
@@ -116,8 +117,29 @@ struct MastodonSession {
                 case (let data?, let response as HTTPURLResponse, _):
                     if 200..<300 ~= response.statusCode {
                         do {
-                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                            print(json)
+                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else { return }
+                            
+                            guard let accessToken = json["access_token"] else { return }
+                            guard let createdAtString = json["created_at"] else { return }
+                            guard let createdAt = Double(createdAtString) else { return }
+                            let createdAtDate = Date(timeIntervalSinceReferenceDate: createdAt)
+                       
+                            let a = Accounts.currentUser()
+                            
+//                            let host: String
+//                            let userName: String
+//                            let accessToken: String
+//                            let clientID: String
+//                            let clientSecret: String
+//                            let createdAt: TimeInterval
+//                            
+//                            let json: [String :Any] = [
+//                                "accessToken": accessToken,
+//                                "createdAt": createdAt,
+//                                "host": host,
+//                                "clientID":
+//                            ]
+                            
                         } catch {
                             print(error)
                         }
@@ -158,7 +180,7 @@ struct MastodonSession {
     }
     
     static func sessions() -> [MastodonSession] {
-        let keychain = MiniKeychain(service:"com.sonson.swiftodon.clientKeys")
+        let keychain = Keychain(service:"com.sonson.swiftodon.account")
         do {
             let keys = try keychain.keys()
         } catch {
@@ -173,7 +195,7 @@ struct MastodonSession {
     }
     
     static func delete(host: String) throws {
-        let keychain = MiniKeychain(service:"com.sonson.swiftodon.client")
+        let keychain = Keychain(service:"com.sonson.swiftodon.client")
         keychain.delete(key: host)
     }
     
@@ -183,12 +205,12 @@ struct MastodonSession {
             "clientSecret": clientSecret
         ]
         let data = try JSONSerialization.data(withJSONObject: info, options: [])
-        let keychain = MiniKeychain(service:"com.sonson.swiftodon.client")
+        let keychain = Keychain(service:"com.sonson.swiftodon.client")
         try keychain.save(key: host, data: data)
     }
     
     static func clientKeys(of host: String) throws -> (String, String) {
-        let keychain = MiniKeychain(service:"com.sonson.swiftodon.client")
+        let keychain = Keychain(service:"com.sonson.swiftodon.client")
         let data = try keychain.data(of: host)
         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else { throw MastodonSessionError.invalidJSONDataInKeychain }
         guard let clientID = json["clientID"] else { throw MastodonSessionError.invalidJSONDataInKeychain }

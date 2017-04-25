@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */ = {isa = PBXBuildFile; fileRef = 144ECFBB1EAB2D98003E36E3 /* MastodonKit */; };
 		144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */; };
 		1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */; };
 		1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450A20F1EAA1BCC00867E62 /* ViewController.swift */; };
@@ -23,6 +22,46 @@
 		14B64E541EAD4D46009940EA /* UZTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E491EAD4D17009940EA /* UZTextView.framework */; };
 		14B64E551EAD4D46009940EA /* UZTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E491EAD4D17009940EA /* UZTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14B64E5A1EAD4E23009940EA /* MastodonSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B64E591EAD4E23009940EA /* MastodonSession.swift */; };
+		14CA4E5B1EAFA92900C2196A /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E5A1EAFA92900C2196A /* AccountListViewController.swift */; };
+		14CA4E6C1EAFAEA600C2196A /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E5F1EAFAEA600C2196A /* Accounts.swift */; };
+		14CA4E6D1EAFAEA600C2196A /* Applications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E601EAFAEA600C2196A /* Applications.swift */; };
+		14CA4E6E1EAFAEA600C2196A /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E611EAFAEA600C2196A /* Blocks.swift */; };
+		14CA4E6F1EAFAEA600C2196A /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E621EAFAEA600C2196A /* Favourites.swift */; };
+		14CA4E701EAFAEA600C2196A /* FollowRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E631EAFAEA600C2196A /* FollowRequests.swift */; };
+		14CA4E711EAFAEA600C2196A /* Instances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E641EAFAEA600C2196A /* Instances.swift */; };
+		14CA4E721EAFAEA600C2196A /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E651EAFAEA600C2196A /* Login.swift */; };
+		14CA4E731EAFAEA600C2196A /* Mutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E661EAFAEA600C2196A /* Mutes.swift */; };
+		14CA4E741EAFAEA600C2196A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E671EAFAEA600C2196A /* Notifications.swift */; };
+		14CA4E751EAFAEA600C2196A /* Reports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E681EAFAEA600C2196A /* Reports.swift */; };
+		14CA4E761EAFAEA600C2196A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E691EAFAEA600C2196A /* Search.swift */; };
+		14CA4E771EAFAEA600C2196A /* Statuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E6A1EAFAEA600C2196A /* Statuses.swift */; };
+		14CA4E781EAFAEA600C2196A /* Timelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E6B1EAFAEA600C2196A /* Timelines.swift */; };
+		14CA4E941EAFAEE000C2196A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E791EAFAEE000C2196A /* Foundation+Extensions.swift */; };
+		14CA4E951EAFAEE000C2196A /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E7A1EAFAEE000C2196A /* Functions.swift */; };
+		14CA4E961EAFAEE000C2196A /* MastodonClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E7B1EAFAEE000C2196A /* MastodonClient.swift */; };
+		14CA4E971EAFAEE000C2196A /* AccessScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E7D1EAFAEE000C2196A /* AccessScope.swift */; };
+		14CA4E981EAFAEE000C2196A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E7E1EAFAEE000C2196A /* Account.swift */; };
+		14CA4E991EAFAEE000C2196A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E7F1EAFAEE000C2196A /* Application.swift */; };
+		14CA4E9A1EAFAEE000C2196A /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E801EAFAEE000C2196A /* Attachment.swift */; };
+		14CA4E9B1EAFAEE000C2196A /* AttachmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E811EAFAEE000C2196A /* AttachmentType.swift */; };
+		14CA4E9C1EAFAEE000C2196A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E821EAFAEE000C2196A /* Card.swift */; };
+		14CA4E9D1EAFAEE000C2196A /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E831EAFAEE000C2196A /* Context.swift */; };
+		14CA4E9E1EAFAEE000C2196A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E841EAFAEE000C2196A /* HTTPMethod.swift */; };
+		14CA4E9F1EAFAEE000C2196A /* Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E851EAFAEE000C2196A /* Instance.swift */; };
+		14CA4EA01EAFAEE000C2196A /* LoginSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E861EAFAEE000C2196A /* LoginSettings.swift */; };
+		14CA4EA11EAFAEE000C2196A /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E871EAFAEE000C2196A /* Mention.swift */; };
+		14CA4EA21EAFAEE000C2196A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E881EAFAEE000C2196A /* Notification.swift */; };
+		14CA4EA31EAFAEE000C2196A /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E891EAFAEE000C2196A /* NotificationType.swift */; };
+		14CA4EA41EAFAEE000C2196A /* RegisteredApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8A1EAFAEE000C2196A /* RegisteredApplication.swift */; };
+		14CA4EA51EAFAEE000C2196A /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8B1EAFAEE000C2196A /* Relationship.swift */; };
+		14CA4EA61EAFAEE000C2196A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8C1EAFAEE000C2196A /* Report.swift */; };
+		14CA4EA71EAFAEE000C2196A /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8D1EAFAEE000C2196A /* RequestError.swift */; };
+		14CA4EA81EAFAEE000C2196A /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8E1EAFAEE000C2196A /* Results.swift */; };
+		14CA4EA91EAFAEE000C2196A /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E8F1EAFAEE000C2196A /* Status.swift */; };
+		14CA4EAA1EAFAEE000C2196A /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E901EAFAEE000C2196A /* Tag.swift */; };
+		14CA4EAB1EAFAEE000C2196A /* VisibilityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E911EAFAEE000C2196A /* VisibilityType.swift */; };
+		14CA4EAC1EAFAEE000C2196A /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E921EAFAEE000C2196A /* Resource.swift */; };
+		14CA4EAD1EAFAEE000C2196A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4E931EAFAEE000C2196A /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,7 +82,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		144ECFBB1EAB2D98003E36E3 /* MastodonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MastodonKit; path = vendor/MastodonKit/Sources/MastodonKit; sourceTree = "<group>"; };
 		144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		1450A20A1EAA1BCC00867E62 /* swiftodon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftodon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1450A20D1EAA1BCC00867E62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +96,46 @@
 		14B64E491EAD4D17009940EA /* UZTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UZTextView.framework; path = Carthage/Build/iOS/UZTextView.framework; sourceTree = "<group>"; };
 		14B64E591EAD4E23009940EA /* MastodonSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonSession.swift; sourceTree = "<group>"; };
 		14B64E5B1EAD51AC009940EA /* swiftodon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftodon.entitlements; sourceTree = "<group>"; };
+		14CA4E5A1EAFA92900C2196A /* AccountListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListViewController.swift; sourceTree = "<group>"; };
+		14CA4E5F1EAFAEA600C2196A /* Accounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accounts.swift; sourceTree = "<group>"; };
+		14CA4E601EAFAEA600C2196A /* Applications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applications.swift; sourceTree = "<group>"; };
+		14CA4E611EAFAEA600C2196A /* Blocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
+		14CA4E621EAFAEA600C2196A /* Favourites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
+		14CA4E631EAFAEA600C2196A /* FollowRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequests.swift; sourceTree = "<group>"; };
+		14CA4E641EAFAEA600C2196A /* Instances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instances.swift; sourceTree = "<group>"; };
+		14CA4E651EAFAEA600C2196A /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		14CA4E661EAFAEA600C2196A /* Mutes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mutes.swift; sourceTree = "<group>"; };
+		14CA4E671EAFAEA600C2196A /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		14CA4E681EAFAEA600C2196A /* Reports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reports.swift; sourceTree = "<group>"; };
+		14CA4E691EAFAEA600C2196A /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		14CA4E6A1EAFAEA600C2196A /* Statuses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statuses.swift; sourceTree = "<group>"; };
+		14CA4E6B1EAFAEA600C2196A /* Timelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timelines.swift; sourceTree = "<group>"; };
+		14CA4E791EAFAEE000C2196A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Foundation+Extensions.swift"; path = "vendor/MastodonKit/Sources/MastodonKit/Foundation+Extensions.swift"; sourceTree = "<group>"; };
+		14CA4E7A1EAFAEE000C2196A /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Functions.swift; path = vendor/MastodonKit/Sources/MastodonKit/Functions.swift; sourceTree = "<group>"; };
+		14CA4E7B1EAFAEE000C2196A /* MastodonClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MastodonClient.swift; path = vendor/MastodonKit/Sources/MastodonKit/MastodonClient.swift; sourceTree = "<group>"; };
+		14CA4E7D1EAFAEE000C2196A /* AccessScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessScope.swift; sourceTree = "<group>"; };
+		14CA4E7E1EAFAEE000C2196A /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		14CA4E7F1EAFAEE000C2196A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		14CA4E801EAFAEE000C2196A /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		14CA4E811EAFAEE000C2196A /* AttachmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentType.swift; sourceTree = "<group>"; };
+		14CA4E821EAFAEE000C2196A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		14CA4E831EAFAEE000C2196A /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		14CA4E841EAFAEE000C2196A /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		14CA4E851EAFAEE000C2196A /* Instance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instance.swift; sourceTree = "<group>"; };
+		14CA4E861EAFAEE000C2196A /* LoginSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSettings.swift; sourceTree = "<group>"; };
+		14CA4E871EAFAEE000C2196A /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
+		14CA4E881EAFAEE000C2196A /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		14CA4E891EAFAEE000C2196A /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		14CA4E8A1EAFAEE000C2196A /* RegisteredApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisteredApplication.swift; sourceTree = "<group>"; };
+		14CA4E8B1EAFAEE000C2196A /* Relationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		14CA4E8C1EAFAEE000C2196A /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		14CA4E8D1EAFAEE000C2196A /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		14CA4E8E1EAFAEE000C2196A /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		14CA4E8F1EAFAEE000C2196A /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		14CA4E901EAFAEE000C2196A /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		14CA4E911EAFAEE000C2196A /* VisibilityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibilityType.swift; sourceTree = "<group>"; };
+		14CA4E921EAFAEE000C2196A /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = vendor/MastodonKit/Sources/MastodonKit/Resource.swift; sourceTree = "<group>"; };
+		14CA4E931EAFAEE000C2196A /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resources.swift; path = vendor/MastodonKit/Sources/MastodonKit/Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +156,7 @@
 		1450A2011EAA1BCC00867E62 = {
 			isa = PBXGroup;
 			children = (
-				144ECFBB1EAB2D98003E36E3 /* MastodonKit */,
+				14CA4E5C1EAFAE8000C2196A /* MastodonKit */,
 				1450A20C1EAA1BCC00867E62 /* swiftodon */,
 				1450A20B1EAA1BCC00867E62 /* Products */,
 				14B64E451EAD4D17009940EA /* Frameworks */,
@@ -105,6 +183,7 @@
 				1450A2191EAA1BCC00867E62 /* Info.plist */,
 				144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */,
 				14B64E591EAD4E23009940EA /* MastodonSession.swift */,
+				14CA4E5A1EAFA92900C2196A /* AccountListViewController.swift */,
 			);
 			path = swiftodon;
 			sourceTree = "<group>";
@@ -118,6 +197,70 @@
 				14B64E491EAD4D17009940EA /* UZTextView.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14CA4E5C1EAFAE8000C2196A /* MastodonKit */ = {
+			isa = PBXGroup;
+			children = (
+				14CA4E791EAFAEE000C2196A /* Foundation+Extensions.swift */,
+				14CA4E7A1EAFAEE000C2196A /* Functions.swift */,
+				14CA4E7B1EAFAEE000C2196A /* MastodonClient.swift */,
+				14CA4E7C1EAFAEE000C2196A /* Models */,
+				14CA4E921EAFAEE000C2196A /* Resource.swift */,
+				14CA4E931EAFAEE000C2196A /* Resources.swift */,
+				14CA4E5E1EAFAEA600C2196A /* Endpoints */,
+			);
+			name = MastodonKit;
+			sourceTree = "<group>";
+		};
+		14CA4E5E1EAFAEA600C2196A /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				14CA4E5F1EAFAEA600C2196A /* Accounts.swift */,
+				14CA4E601EAFAEA600C2196A /* Applications.swift */,
+				14CA4E611EAFAEA600C2196A /* Blocks.swift */,
+				14CA4E621EAFAEA600C2196A /* Favourites.swift */,
+				14CA4E631EAFAEA600C2196A /* FollowRequests.swift */,
+				14CA4E641EAFAEA600C2196A /* Instances.swift */,
+				14CA4E651EAFAEA600C2196A /* Login.swift */,
+				14CA4E661EAFAEA600C2196A /* Mutes.swift */,
+				14CA4E671EAFAEA600C2196A /* Notifications.swift */,
+				14CA4E681EAFAEA600C2196A /* Reports.swift */,
+				14CA4E691EAFAEA600C2196A /* Search.swift */,
+				14CA4E6A1EAFAEA600C2196A /* Statuses.swift */,
+				14CA4E6B1EAFAEA600C2196A /* Timelines.swift */,
+			);
+			name = Endpoints;
+			path = vendor/MastodonKit/Sources/MastodonKit/Endpoints;
+			sourceTree = "<group>";
+		};
+		14CA4E7C1EAFAEE000C2196A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				14CA4E7D1EAFAEE000C2196A /* AccessScope.swift */,
+				14CA4E7E1EAFAEE000C2196A /* Account.swift */,
+				14CA4E7F1EAFAEE000C2196A /* Application.swift */,
+				14CA4E801EAFAEE000C2196A /* Attachment.swift */,
+				14CA4E811EAFAEE000C2196A /* AttachmentType.swift */,
+				14CA4E821EAFAEE000C2196A /* Card.swift */,
+				14CA4E831EAFAEE000C2196A /* Context.swift */,
+				14CA4E841EAFAEE000C2196A /* HTTPMethod.swift */,
+				14CA4E851EAFAEE000C2196A /* Instance.swift */,
+				14CA4E861EAFAEE000C2196A /* LoginSettings.swift */,
+				14CA4E871EAFAEE000C2196A /* Mention.swift */,
+				14CA4E881EAFAEE000C2196A /* Notification.swift */,
+				14CA4E891EAFAEE000C2196A /* NotificationType.swift */,
+				14CA4E8A1EAFAEE000C2196A /* RegisteredApplication.swift */,
+				14CA4E8B1EAFAEE000C2196A /* Relationship.swift */,
+				14CA4E8C1EAFAEE000C2196A /* Report.swift */,
+				14CA4E8D1EAFAEE000C2196A /* RequestError.swift */,
+				14CA4E8E1EAFAEE000C2196A /* Results.swift */,
+				14CA4E8F1EAFAEE000C2196A /* Status.swift */,
+				14CA4E901EAFAEE000C2196A /* Tag.swift */,
+				14CA4E911EAFAEE000C2196A /* VisibilityType.swift */,
+			);
+			name = Models;
+			path = vendor/MastodonKit/Sources/MastodonKit/Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +332,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				144ECFBC1EAB2D98003E36E3 /* MastodonKit in Resources */,
 				1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */,
 				1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */,
 				1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */,
@@ -203,10 +345,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14CA4E991EAFAEE000C2196A /* Application.swift in Sources */,
+				14CA4E781EAFAEA600C2196A /* Timelines.swift in Sources */,
+				14CA4EA11EAFAEE000C2196A /* Mention.swift in Sources */,
 				1450A2101EAA1BCC00867E62 /* ViewController.swift in Sources */,
 				144ECFBE1EAC0584003E36E3 /* AddAccountViewController.swift in Sources */,
+				14CA4E9A1EAFAEE000C2196A /* Attachment.swift in Sources */,
+				14CA4E951EAFAEE000C2196A /* Functions.swift in Sources */,
+				14CA4E9B1EAFAEE000C2196A /* AttachmentType.swift in Sources */,
+				14CA4EA21EAFAEE000C2196A /* Notification.swift in Sources */,
+				14CA4EA81EAFAEE000C2196A /* Results.swift in Sources */,
+				14CA4E701EAFAEA600C2196A /* FollowRequests.swift in Sources */,
+				14CA4EA91EAFAEE000C2196A /* Status.swift in Sources */,
+				14CA4E721EAFAEA600C2196A /* Login.swift in Sources */,
+				14CA4E971EAFAEE000C2196A /* AccessScope.swift in Sources */,
+				14CA4EAA1EAFAEE000C2196A /* Tag.swift in Sources */,
+				14CA4EAC1EAFAEE000C2196A /* Resource.swift in Sources */,
+				14CA4E9F1EAFAEE000C2196A /* Instance.swift in Sources */,
+				14CA4E9C1EAFAEE000C2196A /* Card.swift in Sources */,
+				14CA4EA71EAFAEE000C2196A /* RequestError.swift in Sources */,
 				14B64E5A1EAD4E23009940EA /* MastodonSession.swift in Sources */,
+				14CA4E981EAFAEE000C2196A /* Account.swift in Sources */,
+				14CA4EA31EAFAEE000C2196A /* NotificationType.swift in Sources */,
+				14CA4E5B1EAFA92900C2196A /* AccountListViewController.swift in Sources */,
+				14CA4E731EAFAEA600C2196A /* Mutes.swift in Sources */,
+				14CA4EA51EAFAEE000C2196A /* Relationship.swift in Sources */,
+				14CA4E6D1EAFAEA600C2196A /* Applications.swift in Sources */,
+				14CA4E751EAFAEA600C2196A /* Reports.swift in Sources */,
+				14CA4EA61EAFAEE000C2196A /* Report.swift in Sources */,
+				14CA4E9E1EAFAEE000C2196A /* HTTPMethod.swift in Sources */,
+				14CA4E9D1EAFAEE000C2196A /* Context.swift in Sources */,
+				14CA4E741EAFAEA600C2196A /* Notifications.swift in Sources */,
+				14CA4E6E1EAFAEA600C2196A /* Blocks.swift in Sources */,
+				14CA4EA01EAFAEE000C2196A /* LoginSettings.swift in Sources */,
 				1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */,
+				14CA4EAB1EAFAEE000C2196A /* VisibilityType.swift in Sources */,
+				14CA4E711EAFAEA600C2196A /* Instances.swift in Sources */,
+				14CA4E761EAFAEA600C2196A /* Search.swift in Sources */,
+				14CA4E771EAFAEA600C2196A /* Statuses.swift in Sources */,
+				14CA4E961EAFAEE000C2196A /* MastodonClient.swift in Sources */,
+				14CA4E6F1EAFAEA600C2196A /* Favourites.swift in Sources */,
+				14CA4EA41EAFAEE000C2196A /* RegisteredApplication.swift in Sources */,
+				14CA4EAD1EAFAEE000C2196A /* Resources.swift in Sources */,
+				14CA4E6C1EAFAEA600C2196A /* Accounts.swift in Sources */,
+				14CA4E941EAFAEE000C2196A /* Foundation+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
