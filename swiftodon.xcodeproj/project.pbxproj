@@ -13,6 +13,11 @@
 		1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2111EAA1BCC00867E62 /* Main.storyboard */; };
 		1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2141EAA1BCC00867E62 /* Assets.xcassets */; };
 		1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1450A2161EAA1BCC00867E62 /* LaunchScreen.storyboard */; };
+		1482E0B31EB0425300EFEB62 /* Dictionary+swiftodon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E0B21EB0425300EFEB62 /* Dictionary+swiftodon.swift */; };
+		1482E0B51EB071A800EFEB62 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E0B41EB071A800EFEB62 /* StatusViewController.swift */; };
+		1482E0B71EB071D900EFEB62 /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E0B61EB071D900EFEB62 /* StatusController.swift */; };
+		1482E0B91EB09C5800EFEB62 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E0B81EB09C5800EFEB62 /* TimelineCell.swift */; };
+		1482E0BB1EB09D1B00EFEB62 /* TimelineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1482E0BA1EB09D1B00EFEB62 /* TimelineCell.xib */; };
 		14B64E4E1EAD4D46009940EA /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E461EAD4D17009940EA /* CommonCrypto.framework */; };
 		14B64E4F1EAD4D46009940EA /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E461EAD4D17009940EA /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14B64E501EAD4D46009940EA /* HTMLSpecialCharacters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */; };
@@ -90,6 +95,11 @@
 		1450A2141EAA1BCC00867E62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1450A2171EAA1BCC00867E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1450A2191EAA1BCC00867E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1482E0B21EB0425300EFEB62 /* Dictionary+swiftodon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+swiftodon.swift"; sourceTree = "<group>"; };
+		1482E0B41EB071A800EFEB62 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		1482E0B61EB071D900EFEB62 /* StatusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusController.swift; sourceTree = "<group>"; };
+		1482E0B81EB09C5800EFEB62 /* TimelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
+		1482E0BA1EB09D1B00EFEB62 /* TimelineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineCell.xib; sourceTree = "<group>"; };
 		14B64E461EAD4D17009940EA /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/iOS/CommonCrypto.framework; sourceTree = "<group>"; };
 		14B64E471EAD4D17009940EA /* HTMLSpecialCharacters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLSpecialCharacters.framework; path = Carthage/Build/iOS/HTMLSpecialCharacters.framework; sourceTree = "<group>"; };
 		14B64E481EAD4D17009940EA /* MiniKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniKeychain.framework; path = Carthage/Build/iOS/MiniKeychain.framework; sourceTree = "<group>"; };
@@ -182,8 +192,13 @@
 				1450A2161EAA1BCC00867E62 /* LaunchScreen.storyboard */,
 				1450A2191EAA1BCC00867E62 /* Info.plist */,
 				144ECFBD1EAC0584003E36E3 /* AddAccountViewController.swift */,
+				1482E0B81EB09C5800EFEB62 /* TimelineCell.swift */,
+				1482E0BA1EB09D1B00EFEB62 /* TimelineCell.xib */,
+				1482E0B41EB071A800EFEB62 /* StatusViewController.swift */,
+				1482E0B61EB071D900EFEB62 /* StatusController.swift */,
 				14B64E591EAD4E23009940EA /* MastodonSession.swift */,
 				14CA4E5A1EAFA92900C2196A /* AccountListViewController.swift */,
+				1482E0B21EB0425300EFEB62 /* Dictionary+swiftodon.swift */,
 			);
 			path = swiftodon;
 			sourceTree = "<group>";
@@ -332,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1482E0BB1EB09D1B00EFEB62 /* TimelineCell.xib in Resources */,
 				1450A2181EAA1BCC00867E62 /* LaunchScreen.storyboard in Resources */,
 				1450A2151EAA1BCC00867E62 /* Assets.xcassets in Resources */,
 				1450A2131EAA1BCC00867E62 /* Main.storyboard in Resources */,
@@ -363,8 +379,11 @@
 				14CA4EAC1EAFAEE000C2196A /* Resource.swift in Sources */,
 				14CA4E9F1EAFAEE000C2196A /* Instance.swift in Sources */,
 				14CA4E9C1EAFAEE000C2196A /* Card.swift in Sources */,
+				1482E0B51EB071A800EFEB62 /* StatusViewController.swift in Sources */,
 				14CA4EA71EAFAEE000C2196A /* RequestError.swift in Sources */,
 				14B64E5A1EAD4E23009940EA /* MastodonSession.swift in Sources */,
+				1482E0B31EB0425300EFEB62 /* Dictionary+swiftodon.swift in Sources */,
+				1482E0B71EB071D900EFEB62 /* StatusController.swift in Sources */,
 				14CA4E981EAFAEE000C2196A /* Account.swift in Sources */,
 				14CA4EA31EAFAEE000C2196A /* NotificationType.swift in Sources */,
 				14CA4E5B1EAFA92900C2196A /* AccountListViewController.swift in Sources */,
@@ -378,6 +397,7 @@
 				14CA4E741EAFAEA600C2196A /* Notifications.swift in Sources */,
 				14CA4E6E1EAFAEA600C2196A /* Blocks.swift in Sources */,
 				14CA4EA01EAFAEE000C2196A /* LoginSettings.swift in Sources */,
+				1482E0B91EB09C5800EFEB62 /* TimelineCell.swift in Sources */,
 				1450A20E1EAA1BCC00867E62 /* AppDelegate.swift in Sources */,
 				14CA4EAB1EAFAEE000C2196A /* VisibilityType.swift in Sources */,
 				14CA4E711EAFAEA600C2196A /* Instances.swift in Sources */,
