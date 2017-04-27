@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import swiftodon
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.add(sender:)))
     }
-
+    
+    func add(sender: Any) {
+        let con = AccountListViewController(nibName: nil, bundle: nil)
+        let nav = UINavigationController(rootViewController: con)
+        present(nav, animated: true, completion: nil)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

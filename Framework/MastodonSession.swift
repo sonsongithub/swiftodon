@@ -12,22 +12,37 @@ import UIKit
 
 enum MastodonSessionError: Error {
     case invalidJSONDataInKeychain
+    case invalidBaseURL
+    case invalidJSONEntry(name: String)
+    case invalidHost(host: String)
+    case invalidParameter
+    case clientKeyNotFound
+    
+    case invalidCallbackURL
+    case invalidJSON
+    case invalidJSONData
+    case httpError(code: Int)
 }
 
-let MastodonSessionUpdateNotification = UIKit.Notification.Name(rawValue: "MastodonSessionUpdateNotification")
+public let MastodonSessionUpdateNotification = UIKit.Notification.Name(rawValue: "MastodonSessionUpdateNotification")
 
-struct MastodonSession {
+public struct MastodonSession {
+    let baseURL: URL
     let host: String
-    let userName: String
-    let accessToken: String
-    let clientID: String
-    let clientSecret: String
-    let createdAt: TimeInterval
+    var userName: String
+    var accessToken: String
+    var clientID: String
+    var clientSecret: String
+    var createdAt: TimeInterval
     
     // MARK: - Static properties
     
     static func redirectURI(host: String) -> String {
         return "swiftodon://\(host)/"
+    }
+    
+    static var version: String {
+        return "v1"
     }
     
     static var clientName: String {
@@ -59,11 +74,13 @@ struct MastodonSession {
         ]
     }
     
-    var key: String {
+    public var key: String {
         return "\(userName)@\(host)"
     }
     
-    init(host: String, userName: String, accessToken: String, clientID: String, clientSecret: String, createdAt: Double) {
+    public init(host: String, userName: String, accessToken: String, clientID: String, clientSecret: String, createdAt: Double) throws {
+        guard let baseURL = URL(string: "https://\(host)/api/\(MastodonSession.version)") else { throw MastodonSessionError.invalidBaseURL }
+        self.baseURL = baseURL
         self.host = host
         self.userName = userName
         self.accessToken = accessToken
@@ -72,14 +89,23 @@ struct MastodonSession {
         self.createdAt = createdAt
     }
     
-    init?(json: JSONDictionary) {
-        guard let host = json["host"] as? String else { return nil }
-        guard let userName = json["userName"] as? String else { return nil }
-        guard let accessToken = json["accessToken"] as? String else { return nil }
-        guard let clientID = json["clientID"] as? String else { return nil }
-        guard let clientSecret = json["clientSecret"] as? String else { return nil }
-        guard let createdAt = json["createdAt"] as? Double else { return nil }
+    public init(json: JSONDictionary) throws {
+        guard let host = json["host"] as? String
+            else { throw MastodonSessionError.invalidJSONEntry(name: "host") }
+        guard let userName = json["userName"] as? String
+            else { throw MastodonSessionError.invalidJSONEntry(name: "userName") }
+        guard let accessToken = json["accessToken"] as? String
+            else { throw MastodonSessionError.invalidJSONEntry(name: "accessToken") }
+        guard let clientID = json["clientID"] as? String
+            else { throw MastodonSessionError.invalidJSONEntry(name: "clientID") }
+        guard let clientSecret = json["clientSecret"] as? String
+            else { throw MastodonSessionError.invalidJSONEntry(name: "clientSecret") }
+        guard let createdAt = json["createdAt"] as? Double
+            else { throw MastodonSessionError.invalidJSONEntry(name: "createdAt") }
+        guard let baseURL = URL(string: "https://\(host)/api/\(MastodonSession.version)")
+            else { throw MastodonSessionError.invalidBaseURL }
         
+        self.baseURL = baseURL
         self.host = host
         self.userName = userName
         self.accessToken = accessToken
@@ -93,32 +119,18 @@ struct MastodonSession {
         let keychain = Keychain(service: MastodonSession.accountKeychainIdentifier)
         try keychain.save(key: key, data: data)
     }
-        
-//    func createRequest<T>(resouce: Resource<T>) -> URLRequest {
-//        let baseURL = "https://\(host)/api/v1/"
-//        
-//        let components = URLComponents(baseURL: baseURL, resource: resouce)
-//        
-//        var request = URLRequest(url: components.url!, timeoutInterval: 30)
-//        request.httpMethod = resouce.httpMethod.stringValue
-//        
-//        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-//        
-//        return request
-//    }
     
     // MARK: -
     
-    static func tryToDownloadClientKeys(host: String) {
-        
-        let url = URL(string: "https://\(host)/api/v1/apps")!
+    static func tryToDownloadClientKeys(host: String) throws {
+        guard let url = URL(string: "https://\(host)/api/v1/apps") else { throw MastodonSessionError.invalidHost(host: host) }
         
         let parameters: [String: String] = [
             "client_name": clientName,
             "redirect_uris": redirectURI(host: host),
             "scopes": scopes
         ]
-        let data = parameters.URLQuery.data(using: .utf8)!
+        guard let data = parameters.URLQuery.data(using: .utf8) else { throw MastodonSessionError.invalidParameter }
         
         var request = URLRequest(url: url)
         request.httpBody = data
@@ -148,73 +160,74 @@ struct MastodonSession {
         task.resume()
     }
     
-    static func tryToDownloadUserProfile(session: MastodonSession) {
-//        let accountResource = Accounts.currentUser()
-//        let request = session.createRequest(resouce: accountResource)
-//        
-//        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
-//            if let data = data, let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) {
-//                if let account = accountResource.parse(jsonObject) {
-//                    let session = MastodonSession(host: session.host, userName: account.username, accessToken: session.accessToken, clientID: session.clientID, clientSecret: session.clientSecret, createdAt: session.createdAt)
-//                    do {
-//                        try session.save()
-//                        DispatchQueue.main.async(execute: {
-//                            NotificationCenter.default.post(name: MastodonSessionUpdateNotification, object: nil, userInfo: nil)
-//                        })
-//                    } catch {
-//                        print(error)
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        task.resume()
+    static func tryToDownloadUserProfile(session: MastodonSession) throws {
+        let endpoint = CurrentUser(session: session)
+        let request = try endpoint.request()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            do {
+                let account = try endpoint.parse(data: data, response: response, error: error)
+                var copied = session
+                copied.userName = account.username
+                try copied.save()
+                DispatchQueue.main.async(execute: {
+                    NotificationCenter.default.post(name: MastodonSessionUpdateNotification, object: nil, userInfo: nil)
+                })
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
     }
     
-    static func tryToDownloadAccessToken(host: String, code: String) {
-        do {
-            let (clientID, clientSecret) = try MastodonSession.clientKeys(of: host)
-            
-            let parameters: [String: String] = [
-                "grant_type": "authorization_code",
-                "client_id": clientID,
-                "client_secret": clientSecret,
-                "redirect_uri": redirectURI(host: host),
-                "code": code
-            ]
-            guard let data = parameters.URLQuery.data(using: .utf8) else { return }
-            guard let url = URL(string: "https://\(host)/oauth/token") else { return }
-            
-            var request = URLRequest(url: url)
-            request.httpBody = data
-            request.httpMethod = "POST"
-            
-            let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: request) { (data, response, error) in
-                switch (data, response, error) {
-                case (let data?, let response as HTTPURLResponse, _):
-                    if 200..<300 ~= response.statusCode {
-                        do {
-                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                            guard let accessToken = json["access_token"] as? String else { return }
-                            guard let createdAt = json["created_at"] as? Double else { return }
-                            let session = MastodonSession(host: host, userName: "", accessToken: accessToken, clientID: clientID, clientSecret: clientSecret, createdAt: createdAt)
-                            tryToDownloadUserProfile(session: session)
-                        } catch {
-                            print(error)
-                        }
-                    } else {
-                    }
-                case (_, _, let error?):
-                    print(error)
-                default:
-                    fatalError("Unexpected response from URLsession.")
+    static func handleAccessTokenReponse(data: Data?, response: URLResponse?, error: Error?) throws -> (String, Double) {
+        switch (data, response, error) {
+        case (let data?, let response as HTTPURLResponse, _):
+            if 200..<300 ~= response.statusCode {
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { throw MastodonSessionError.invalidJSONData }
+                    guard let accessToken = json["access_token"] as? String else { throw MastodonSessionError.invalidJSON }
+                    guard let createdAt = json["created_at"] as? Double else { throw MastodonSessionError.invalidJSON }
+                    return (accessToken, createdAt)
+                } catch {
+                    throw error
                 }
+            } else {
+                throw MastodonSessionError.httpError(code: response.statusCode)
             }
-            task.resume()
-        } catch {
-            print(error)
-            return
+        case (_, _, let error?):
+            throw error
+        default:
+            fatalError("Unexpected response from URLsession.")
         }
+    }
+    
+    static func tryToDownloadAccessToken(host: String, code: String) throws {
+        guard let (clientID, clientSecret) = MastodonSession.clientKeys(of: host) else { throw MastodonSessionError.clientKeyNotFound }
+        
+        let parameters: [String: String] = [
+            "grant_type": "authorization_code",
+            "client_id": clientID,
+            "client_secret": clientSecret,
+            "redirect_uri": redirectURI(host: host),
+            "code": code
+        ]
+        guard let data = parameters.URLQuery.data(using: .utf8) else { throw MastodonSessionError.invalidParameter }
+        guard let url = URL(string: "https://\(host)/oauth/token") else { throw MastodonSessionError.invalidBaseURL }
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        request.httpMethod = "POST"
+        
+        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: request) { (data, response, error) in
+            do {
+                let (accessToken, createdAt) = try handleAccessTokenReponse(data: data, response: response, error: error)
+                let session = try MastodonSession(host: host, userName: "", accessToken: accessToken, clientID: clientID, clientSecret: clientSecret, createdAt: createdAt)
+                try tryToDownloadUserProfile(session: session)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
     }
     
     static func openBrowserForOAuth2(host: String, clientID: String) {
@@ -234,16 +247,15 @@ struct MastodonSession {
     
     // MARK: -
     
-    static func sessions() -> [MastodonSession] {
+    public static func sessions() -> [MastodonSession] {
         let keychain = Keychain(service: MastodonSession.accountKeychainIdentifier)
         do {
             let keys = try keychain.keys()
-            
             return keys.flatMap({
                 do {
                     let data = try keychain.data(of: $0)
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return nil }
-                    return MastodonSession(json: json)
+                    return try MastodonSession(json: json)
                 } catch {
                     return nil
                 }
@@ -255,21 +267,38 @@ struct MastodonSession {
         }
     }
     
-    static func add(host: String) {
-        do {
-            let (clientID, _) = try MastodonSession.clientKeys(of: host)
-            openBrowserForOAuth2(host: host, clientID: clientID)
-        } catch MiniKeychain.Status.itemNotFound {
-            tryToDownloadClientKeys(host: host)
-        } catch {
-            print(error)
-        }
+    public static func add(host: String) {
+        guard let (clientID, _) = MastodonSession.clientKeys(of: host)
+            else {
+                do {
+                    try tryToDownloadClientKeys(host: host)
+                } catch {
+                    print(error)
+                }
+                return
+            }
+        openBrowserForOAuth2(host: host, clientID: clientID)
     }
     
     static func removeAll() {
         [MastodonSession.hostKeychainIdentifier, MastodonSession.accountKeychainIdentifier].forEach({
             removeAllData(of: $0)
         })
+    }
+    
+    public static func handleCallback(url: URL) throws {
+        guard let query = url.query else { throw MastodonSessionError.invalidCallbackURL }
+        guard let host = url.host else { throw MastodonSessionError.invalidCallbackURL }
+        let entries = query.components(separatedBy: "&")
+        let dictionary: [String: String] = entries.reduce([:], { (result, string) -> [String: String] in
+            let components = string.components(separatedBy: "=")
+            guard components.count == 2 else { return result }
+            var temp = result
+            temp[components[0]] = components[1]
+            return temp
+        })
+        guard let code = dictionary["code"] else { throw MastodonSessionError.invalidCallbackURL }
+        try MastodonSession.tryToDownloadAccessToken(host: host, code: code)
     }
     
     static func removeAllData(of identifier: String) {
@@ -282,12 +311,12 @@ struct MastodonSession {
         }
     }
     
-    static func delete(host: String) throws {
+    public static func delete(host: String) throws {
         let keychain = Keychain(service: MastodonSession.hostKeychainIdentifier)
         keychain.delete(key: host)
     }
     
-    static func delete(session: MastodonSession) throws {
+    public static func delete(session: MastodonSession) throws {
         let keychain = Keychain(service: MastodonSession.accountKeychainIdentifier)
         keychain.delete(key: "\(session.userName)@\(session.host)")
     }
@@ -302,13 +331,19 @@ struct MastodonSession {
         try keychain.save(key: host, data: data)
     }
     
-    static func clientKeys(of host: String) throws -> (String, String) {
+    static func clientKeys(of host: String) -> (String, String)? {
         let keychain = Keychain(service: MastodonSession.hostKeychainIdentifier)
-        let data = try keychain.data(of: host)
-        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else { throw MastodonSessionError.invalidJSONDataInKeychain }
-        guard let clientID = json["clientID"] else { throw MastodonSessionError.invalidJSONDataInKeychain }
-        guard let clientSecret = json["clientSecret"] else { throw MastodonSessionError.invalidJSONDataInKeychain }
-        return (clientID, clientSecret)
+        do {
+            let data = try keychain.data(of: host)
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else { throw MastodonSessionError.invalidJSONDataInKeychain }
+            guard let clientID = json["clientID"] else { throw MastodonSessionError.invalidJSONDataInKeychain }
+            guard let clientSecret = json["clientSecret"] else { throw MastodonSessionError.invalidJSONDataInKeychain }
+            return (clientID, clientSecret)
+        } catch MiniKeychain.Status.itemNotFound {
+            return nil
+        } catch {
+            keychain.delete(key: host)
+            return nil
+        }
     }
-    
 }

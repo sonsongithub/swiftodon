@@ -1,18 +1,8 @@
 import Foundation
 
-enum HTTPMethod {
-    case get, post, delete, patch
-
-    var stringValue: String {
-        switch self {
-        case .get:
-            return "GET"
-        case .post:
-            return "POST"
-        case .delete:
-            return "DELETE"
-        case .patch:
-            return "PATCH"
-        }
-    }
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case delete = "DELETE"
+    case patch = "PATCH"
 }
