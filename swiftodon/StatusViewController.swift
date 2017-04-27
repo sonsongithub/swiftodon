@@ -14,6 +14,8 @@ class StatusViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(StatusViewController.add(sender:)))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(StatusViewController.didUpdate(notification:)), name: StatusControllerUpdateNotification, object: nil)
         
         let nib = UINib(nibName: "TimelineCell", bundle: nil)
@@ -25,6 +27,12 @@ class StatusViewController: UITableViewController {
             statusController?.textViewWidth = self.view.frame.size.width - 88
             statusController?.update()
         }
+    }
+    
+    func add(sender: Any) {
+        let con = AccountListViewController(nibName: nil, bundle: nil)
+        let nav = UINavigationController(rootViewController: con)
+        present(nav, animated: true, completion: nil)
     }
     
     func didUpdate(notification: NSNotification) {
