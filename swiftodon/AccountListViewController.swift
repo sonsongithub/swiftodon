@@ -57,13 +57,16 @@ class AccountListViewController: UITableViewController {
     }
     
     func load(notification: NSNotification) {
-        list = MastodonSession.sessions()
-        tableView.reloadData()
+        load()
     }
 
     func load() {
-        list = MastodonSession.sessions()
-        tableView.reloadData()
+        do {
+            list = try MastodonSession.sessions()
+            tableView.reloadData()
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - Table view data source

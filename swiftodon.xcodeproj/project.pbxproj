@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1456B92E1EB2CA0000F3E410 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */; };
+		1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1456B92C1EB2C9D700F3E410 /* TimelineController.swift */; };
 		1482E13A1EB1770F00EFEB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E1391EB1770F00EFEB62 /* AppDelegate.swift */; };
-		1482E13C1EB1770F00EFEB62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E13B1EB1770F00EFEB62 /* ViewController.swift */; };
 		1482E13F1EB1770F00EFEB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1482E13D1EB1770F00EFEB62 /* Main.storyboard */; };
 		1482E1411EB1770F00EFEB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1482E1401EB1770F00EFEB62 /* Assets.xcassets */; };
 		1482E1441EB1770F00EFEB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1482E1421EB1770F00EFEB62 /* LaunchScreen.storyboard */; };
@@ -93,9 +94,10 @@
 
 /* Begin PBXFileReference section */
 		14059A531EB1E8B2000A1E7C /* swiftodon-application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "swiftodon-application.entitlements"; sourceTree = SOURCE_ROOT; };
+		1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		1456B92C1EB2C9D700F3E410 /* TimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
 		1482E1361EB1770F00EFEB62 /* swiftodon-application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftodon-application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1482E1391EB1770F00EFEB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1482E13B1EB1770F00EFEB62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1482E13E1EB1770F00EFEB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1482E1401EB1770F00EFEB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1482E1431EB1770F00EFEB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -192,8 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */,
+				1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */,
+				1456B92C1EB2C9D700F3E410 /* TimelineController.swift */,
 				1482E1391EB1770F00EFEB62 /* AppDelegate.swift */,
-				1482E13B1EB1770F00EFEB62 /* ViewController.swift */,
 				1482E13D1EB1770F00EFEB62 /* Main.storyboard */,
 				1482E1401EB1770F00EFEB62 /* Assets.xcassets */,
 				1482E1421EB1770F00EFEB62 /* LaunchScreen.storyboard */,
@@ -436,9 +439,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1482E13C1EB1770F00EFEB62 /* ViewController.swift in Sources */,
+				1456B92E1EB2CA0000F3E410 /* TimelineViewController.swift in Sources */,
 				1482E13A1EB1770F00EFEB62 /* AppDelegate.swift in Sources */,
 				14CFAD6D1EB1FCBA00BCAF18 /* AccountListViewController.swift in Sources */,
+				1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

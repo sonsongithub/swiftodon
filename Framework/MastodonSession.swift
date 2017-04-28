@@ -247,24 +247,18 @@ public struct MastodonSession {
     
     // MARK: -
     
-    public static func sessions() -> [MastodonSession] {
+    public static func sessions() throws -> [MastodonSession] {
         let keychain = Keychain(service: MastodonSession.accountKeychainIdentifier)
-        do {
-            let keys = try keychain.keys()
-            return keys.flatMap({
-                do {
-                    let data = try keychain.data(of: $0)
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return nil }
-                    return try MastodonSession(json: json)
-                } catch {
-                    return nil
-                }
-            })
-            
-        } catch {
-            print(error)
-            return []
-        }
+        let keys = try keychain.keys()
+        return keys.flatMap({
+            do {
+                let data = try keychain.data(of: $0)
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return nil }
+                return try MastodonSession(json: json)
+            } catch {
+                return nil
+            }
+        })
     }
     
     public static func add(host: String) {
