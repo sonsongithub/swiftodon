@@ -29,18 +29,34 @@
         <scene sceneID="Yj0-tx-gZ3">
             <objects>
                 <tableViewController id="moJ-nh-9Kc" customClass="TimelineViewController" customModule="swiftodon_application" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ArM-Q8-spV">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" id="ArM-Q8-spV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oiH-QK-mVG">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="175" id="oiH-QK-mVG" customClass="TextViewCell" customModule="swiftodon_application" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="175"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oiH-QK-mVG" id="yYL-9f-GRD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="174.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5L-bf-F7Q" customClass="UZTextView" customModule="UZTextView">
+                                            <rect key="frame" x="8" y="8" width="359" height="158"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="a5L-bf-F7Q" secondAttribute="trailing" constant="8" id="SVb-Kg-1v6"/>
+                                        <constraint firstAttribute="bottom" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="cCm-mp-0ur"/>
+                                        <constraint firstAttribute="bottom" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="hRY-cp-fqp"/>
+                                        <constraint firstItem="a5L-bf-F7Q" firstAttribute="top" secondItem="yYL-9f-GRD" secondAttribute="top" constant="8" id="p5F-ac-g0o"/>
+                                        <constraint firstItem="a5L-bf-F7Q" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="yjs-lb-dNM"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textView" destination="a5L-bf-F7Q" id="WuN-o6-NY2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -52,7 +68,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJh-L7-j3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="139"/>
+            <point key="canvasLocation" x="116" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>

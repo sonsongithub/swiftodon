@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MastodonProtocol {
+public protocol MastodonProtocol {
     var session: MastodonSession { get }
     var version: String { get }
     var parameters: [String: String] { get }
@@ -17,18 +17,18 @@ protocol MastodonProtocol {
     func request() throws -> URLRequest
 }
 
-enum MastodonProtocolError: Error {
+public enum MastodonProtocolError: Error {
     case cannotCreateRequest
     case unexpectedJSONData
     case httpError(code: Int)
 }
 
 extension MastodonProtocol {
-    var version: String {
+    public var version: String {
         return "v1"
     }
     
-    func request() throws -> URLRequest {
+    public func request() throws -> URLRequest {
         switch method {
         case .get:
             let query = parameters.URLQuery
@@ -77,6 +77,43 @@ struct CurrentUser: MastodonProtocol, AccountEndpoint {
         self.session = session
         self.method = .get
         self.path = "/accounts/verify_credentials"
+        self.parameters = [:]
+    }
+}
+
+public protocol StatusListEndpoint {
+    func parse(data: Data?, response: URLResponse?, error: Error?) throws -> [Status]
+}
+
+extension StatusListEndpoint {
+    public func parse(data: Data?, response: URLResponse?, error: Error?) throws -> [Status] {
+        switch (data, response, error) {
+        case (let data?, let response as HTTPURLResponse, _):
+            if 200..<300 ~= response.statusCode {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let array = json as? [JSONDictionary] else { throw MastodonProtocolError.unexpectedJSONData }
+                return array.flatMap({Status(json: $0)})
+            } else {
+                throw MastodonProtocolError.httpError(code: response.statusCode)
+            }
+        case (_, _, let error?):
+            throw error
+        default:
+            fatalError("Unexpected response from URLsession.")
+        }
+    }
+}
+
+public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
+    public let path: String
+    public var parameters: [String : String]
+    public let session: MastodonSession
+    public let method: HTTPMethod
+    
+    public init(session: MastodonSession) {
+        self.session = session
+        self.method = .get
+        self.path = "/timelines/public"
         self.parameters = [:]
     }
 }
