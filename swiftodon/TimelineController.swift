@@ -41,6 +41,9 @@ class TimelineController {
     var textViewWidth: CGFloat = 0
     var contents: [Content] = []
     
+    var latest: Int
+    var 
+    
     init(session: MastodonSession, type: TimelineType) {
         self.session = session
         self.type = type
@@ -52,6 +55,10 @@ class TimelineController {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             do {
                 let statusArray = try api.parse(data: data, response: response, error: error)
+                
+                statusArray.forEach({
+                    print($0.id)
+                })
 
                 let r: [Content] = statusArray.map({
                     do {

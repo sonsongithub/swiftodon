@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1456B92E1EB2CA0000F3E410 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */; };
 		1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1456B92C1EB2C9D700F3E410 /* TimelineController.swift */; };
+		147EA8581EB36076001A0B44 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EA8571EB36076001A0B44 /* MainPageViewController.swift */; };
 		1482E13A1EB1770F00EFEB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1482E1391EB1770F00EFEB62 /* AppDelegate.swift */; };
 		1482E13F1EB1770F00EFEB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1482E13D1EB1770F00EFEB62 /* Main.storyboard */; };
 		1482E1411EB1770F00EFEB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1482E1401EB1770F00EFEB62 /* Assets.xcassets */; };
@@ -102,6 +103,7 @@
 		14059A531EB1E8B2000A1E7C /* swiftodon-application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "swiftodon-application.entitlements"; sourceTree = SOURCE_ROOT; };
 		1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		1456B92C1EB2C9D700F3E410 /* TimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
+		147EA8571EB36076001A0B44 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		1482E1361EB1770F00EFEB62 /* swiftodon-application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftodon-application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1482E1391EB1770F00EFEB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1482E13E1EB1770F00EFEB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		1482E1381EB1770F00EFEB62 /* swiftodon */ = {
 			isa = PBXGroup;
 			children = (
+				147EA8571EB36076001A0B44 /* MainPageViewController.swift */,
 				14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */,
 				1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */,
 				1456B92C1EB2C9D700F3E410 /* TimelineController.swift */,
@@ -456,6 +459,7 @@
 				1482E13A1EB1770F00EFEB62 /* AppDelegate.swift in Sources */,
 				1486A77A1EB3595600D54B83 /* TextViewCell.swift in Sources */,
 				14CFAD6D1EB1FCBA00BCAF18 /* AccountListViewController.swift in Sources */,
+				147EA8581EB36076001A0B44 /* MainPageViewController.swift in Sources */,
 				1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

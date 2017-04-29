@@ -10,6 +10,7 @@ import UIKit
 import swiftodon
 
 class TimelineViewController: UITableViewController {
+    var session: MastodonSession?
     var home: TimelineController?
     var local: TimelineController?
     var union: TimelineController?
