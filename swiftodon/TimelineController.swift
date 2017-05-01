@@ -88,15 +88,6 @@ class TimelineController {
                 
                 guard statusArray.count > 0 else { return }
                 
-                let idarray = statusArray.map({$0.id})
-                
-                self.latest = idarray.max()!
-                self.old = idarray.min()!
-                
-                statusArray.forEach({
-                    print($0.id)
-                })
-
                 let r: [Content] = statusArray.map({
                     do {
                         guard let data = $0.content.data(using: .utf8) else { throw NSError(domain: "", code: 9, userInfo: nil) }
@@ -112,18 +103,26 @@ class TimelineController {
                     }
                 })
                 
+                var insertedIndices: [IndexPath] = []
+                
                 switch api.type {
                 case .update:
+                    insertedIndices = (self.contents.count..<self.contents.count + r.count).map({IndexPath(row: $0, section: 0)})
                     self.contents.append(contentsOf: r)
                 case .maxID:
+                    insertedIndices = (self.contents.count..<self.contents.count + r.count).map({IndexPath(row: $0, section: 0)})
                     self.contents.append(contentsOf: r)
                 case .sinceID:
+                    insertedIndices = (0..<r.count).map({IndexPath(row: $0, section: 0)})
                     self.contents = r + self.contents
                 }
                 
+                let idarray = statusArray.map({$0.id})
+                self.latest = idarray.max()!
+                self.old = idarray.min()!
                 
                 DispatchQueue.main.async(execute: {
-                    NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: nil)
+                    NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: ["insertedPaths": insertedIndices])
                 })
             } catch {
                 print(error)

@@ -51,7 +51,12 @@ class TimelineViewController: UITableViewController {
     }
     
     func didUpdate(notification: NSNotification) {
-        self.tableView.reloadData()
+        
+        guard let userInfo = notification.userInfo else { return }
+        guard let insertedPaths = userInfo["insertedPaths"] as? [IndexPath] else { return }
+        tableView.beginUpdates()
+        tableView.insertRows(at: insertedPaths, with: UITableViewRowAnimation.fade)
+        tableView.endUpdates()
     }
     
     func add(sender: Any) {
