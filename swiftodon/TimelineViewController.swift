@@ -39,7 +39,7 @@ class TimelineViewController: UITableViewController {
         do {
             let list = try MastodonSession.sessions()
             if list.count > 0 {
-                home = TimelineController(session: list[0], type: .home)
+                home = TimelineController(session: list[0], type: .union)
                 local = TimelineController(session: list[0], type: .local)
                 union = TimelineController(session: list[0], type: .union)
                 home?.textViewWidth = self.view.frame.size.width - 16
@@ -60,6 +60,41 @@ class TimelineViewController: UITableViewController {
         present(nav, animated: true, completion: nil)
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    }
+    
+    func pulldownCheck(_ scrollView: UIScrollView) {
+        guard let controller = home else { return }
+        if scrollView.contentOffset.y + scrollView.contentInset.top < -64 {
+            do {
+                try controller.getLatest()
+                print("trigger")
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func pullupCheck(_ scrollView: UIScrollView) {
+        guard let controller = home else { return }
+        if scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y < -64 {
+            do {
+                try controller.getOld()
+                print("trigger")
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        pullupCheck(scrollView)
+        pulldownCheck(scrollView)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -68,6 +103,17 @@ class TimelineViewController: UITableViewController {
         guard let controller = home else { return 0 }
         return controller.contents.count
     }
+    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let controller = home else { return }
+//        if indexPath.row == controller.contents.count - 1 {
+//            do {
+//                try controller.getOld()
+//            } catch {
+//                print(error)
+//            }
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let controller = home else { return 0 }

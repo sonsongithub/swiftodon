@@ -104,16 +104,40 @@ extension StatusListEndpoint {
     }
 }
 
+public enum TimelineAPIType {
+    case update
+    case sinceID
+    case maxID
+}
+
 public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
     public let path: String
     public var parameters: [String : String]
     public let session: MastodonSession
     public let method: HTTPMethod
+    public let type: TimelineAPIType
     
     public init(session: MastodonSession) {
         self.session = session
         self.method = .get
         self.path = "/timelines/public"
         self.parameters = [:]
+        self.type = .update
+    }
+    
+    public init(session: MastodonSession, since_id id: Int) {
+        self.session = session
+        self.method = .get
+        self.path = "/timelines/public"
+        self.parameters = ["since_id": String(id)]
+        self.type = .sinceID
+    }
+    
+    public init(session: MastodonSession, max_id id: Int) {
+        self.session = session
+        self.method = .get
+        self.path = "/timelines/public"
+        self.parameters = ["max_id": String(id)]
+        self.type = .maxID
     }
 }

@@ -41,20 +41,57 @@ class TimelineController {
     var textViewWidth: CGFloat = 0
     var contents: [Content] = []
     
-    var latest: Int
-    var 
+    var latest: Int = 0
+    var old: Int = 0
+    var loading = false
     
     init(session: MastodonSession, type: TimelineType) {
         self.session = session
         self.type = type
     }
     
+    func getLatest() throws {
+        guard !loading else { return }
+        try fetch(max_id: nil, since_id: latest)
+    }
+    
+    func getOld() throws {
+        guard !loading else { return }
+        try fetch(max_id: old, since_id: nil)
+    }
+    
+    func createAPI(max_id: Int?, since_id: Int?) -> TimelineAPI {
+        switch (max_id, since_id) {
+        case (let max_id?, _):
+            return TimelineAPI(session: session, max_id: max_id)
+        case (_, let since_id?):
+            return TimelineAPI(session: session, since_id: since_id)
+        default:
+            return TimelineAPI(session: session)
+        }
+    }
+    
     func update() throws {
-        let api = TimelineAPI(session: session)
+        guard !loading else { return }
+        try fetch(max_id: nil, since_id: nil)
+    }
+    
+    func fetch(max_id: Int?, since_id: Int?) throws {
+        guard !loading else { return }
+        let api = createAPI(max_id: max_id, since_id: since_id)
         let request = try api.request()
+        loading = true
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            defer { self.loading = false }
             do {
                 let statusArray = try api.parse(data: data, response: response, error: error)
+                
+                guard statusArray.count > 0 else { return }
+                
+                let idarray = statusArray.map({$0.id})
+                
+                self.latest = idarray.max()!
+                self.old = idarray.min()!
                 
                 statusArray.forEach({
                     print($0.id)
@@ -74,7 +111,17 @@ class TimelineController {
                         return Content(attributedString: NSAttributedString(string: ""), height: 44)
                     }
                 })
-                self.contents.append(contentsOf: r)
+                
+                switch api.type {
+                case .update:
+                    self.contents.append(contentsOf: r)
+                case .maxID:
+                    self.contents.append(contentsOf: r)
+                case .sinceID:
+                    self.contents = r + self.contents
+                }
+                
+                
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: nil)
                 })
