@@ -52,6 +52,7 @@
 		1486A7861EB35CA600D54B83 /* HTMLSpecialCharacters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1486A77E1EB35C9600D54B83 /* HTMLSpecialCharacters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1486A7871EB35CA600D54B83 /* MiniKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1486A77F1EB35C9600D54B83 /* MiniKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1486A7881EB35CA600D54B83 /* UZTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1486A7801EB35C9600D54B83 /* UZTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14CA4EAF1EBA87BA00C2196A /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4EAE1EBA87BA00C2196A /* LoadingCell.swift */; };
 		14CFAD6D1EB1FCBA00BCAF18 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */; };
 		14D56EEF1EB1B7B900B0D72C /* MastodonSession+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D56EED1EB1B64800B0D72C /* MastodonSession+Account.swift */; };
 		14D56EF21EB1BA6700B0D72C /* MastodonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D56EF11EB1BA6700B0D72C /* MastodonProtocol.swift */; };
@@ -146,6 +147,7 @@
 		1486A77E1EB35C9600D54B83 /* HTMLSpecialCharacters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLSpecialCharacters.framework; path = Carthage/Build/iOS/HTMLSpecialCharacters.framework; sourceTree = "<group>"; };
 		1486A77F1EB35C9600D54B83 /* MiniKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniKeychain.framework; path = Carthage/Build/iOS/MiniKeychain.framework; sourceTree = "<group>"; };
 		1486A7801EB35C9600D54B83 /* UZTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UZTextView.framework; path = Carthage/Build/iOS/UZTextView.framework; sourceTree = "<group>"; };
+		14CA4EAE1EBA87BA00C2196A /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListViewController.swift; sourceTree = "<group>"; };
 		14D56EED1EB1B64800B0D72C /* MastodonSession+Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MastodonSession+Account.swift"; sourceTree = "<group>"; };
 		14D56EF11EB1BA6700B0D72C /* MastodonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonProtocol.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				14059A531EB1E8B2000A1E7C /* swiftodon-application.entitlements */,
 				1482E1451EB1770F00EFEB62 /* Info.plist */,
 				1486A7791EB3595600D54B83 /* TextViewCell.swift */,
+				14CA4EAE1EBA87BA00C2196A /* LoadingCell.swift */,
 			);
 			path = swiftodon;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				1482E13A1EB1770F00EFEB62 /* AppDelegate.swift in Sources */,
 				1486A77A1EB3595600D54B83 /* TextViewCell.swift in Sources */,
 				14CFAD6D1EB1FCBA00BCAF18 /* AccountListViewController.swift in Sources */,
+				14CA4EAF1EBA87BA00C2196A /* LoadingCell.swift in Sources */,
 				147EA8581EB36076001A0B44 /* MainPageViewController.swift in Sources */,
 				1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */,
 			);

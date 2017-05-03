@@ -37,6 +37,11 @@ struct DownloadMore: TimelineContent {
     let sinceID: Int
 }
 
+struct DownloadingMore: TimelineContent {
+    let height: CGFloat = 44
+    let cellIdentifier = "LoadingCell"
+}
+
 extension String {
     var utf16Range: NSRange {
         return NSRange(location: 0, length: self.utf16.count)
@@ -99,6 +104,7 @@ class TimelineController {
     func createAPI(max_id: Int?, since_id: Int?, insertIndex: Int?) -> (TimelineAPI, TimelineDownloadType) {
         switch (max_id, since_id, insertIndex) {
         case (let max_id?, let since_id?, let insertIndex?):
+            contents[insertIndex] = DownloadingMore()
             return (TimelineAPI(session: session, max_id: max_id, since_id: since_id), .insert(index: insertIndex))
         case (let max_id?, _, _):
             return (TimelineAPI(session: session, max_id: max_id), .add2tail)
@@ -201,7 +207,6 @@ class TimelineController {
                 
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: nil)
-//                    NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: ["insertedPaths": insertedIndices])
                 })
             } catch {
                 print(error)

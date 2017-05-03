@@ -52,11 +52,6 @@ class TimelineViewController: UITableViewController {
     
     func didUpdate(notification: NSNotification) {
         tableView.reloadData()
-//        guard let userInfo = notification.userInfo else { return }
-//        guard let insertedPaths = userInfo["insertedPaths"] as? [IndexPath] else { return }
-//        tableView.beginUpdates()
-//        tableView.insertRows(at: insertedPaths, with: UITableViewRowAnimation.fade)
-//        tableView.endUpdates()
     }
     
     func add(sender: Any) {
@@ -112,6 +107,9 @@ class TimelineViewController: UITableViewController {
         do {
             guard let timelineContent = controller.contents[indexPath.row] as? DownloadMore else { return }
             try controller.fetch(max_id: timelineContent.maxID, since_id: timelineContent.sinceID, insertIndex: indexPath.row)
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
         } catch {
 
         }
@@ -119,7 +117,13 @@ class TimelineViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let controller = home else { return 0 }
-        return controller.contents[indexPath.row].height + 49
+        
+        switch controller.contents[indexPath.row] {
+        case (let content as Content):
+            return content.height + 49
+        default:
+            return 44
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,6 +135,8 @@ class TimelineViewController: UITableViewController {
         if let cell = cell as? TextViewCell, let content = timelineContent as? Content {
             cell.textView.attributedString = content.attributedString
             cell.idLabel.text = String(content.status.id)
+        } else if let cell = cell as? LoadingCell {
+            cell.indicatorView.startAnimating()
         }
 
         return cell

@@ -105,6 +105,26 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="44" id="aDT-dH-FKQ" customClass="LoadingCell" customModule="swiftodon_application" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="247" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aDT-dH-FKQ" id="2aX-a1-yDo">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HGI-Di-Z6T">
+                                            <rect key="frame" x="177" y="11" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="HGI-Di-Z6T" firstAttribute="centerX" secondItem="2aX-a1-yDo" secondAttribute="centerX" id="JIg-Mi-P7b"/>
+                                        <constraint firstItem="HGI-Di-Z6T" firstAttribute="centerY" secondItem="2aX-a1-yDo" secondAttribute="centerY" id="t2H-dM-rzi"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="indicatorView" destination="HGI-Di-Z6T" id="Ujt-7I-Nax"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="moJ-nh-9Kc" id="JeO-Nj-ZuJ"/>
