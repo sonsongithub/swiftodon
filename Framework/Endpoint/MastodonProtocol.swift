@@ -89,6 +89,9 @@ extension StatusListEndpoint {
     public func parse(data: Data?, response: URLResponse?, error: Error?) throws -> [Status] {
         switch (data, response, error) {
         case (let data?, let response as HTTPURLResponse, _):
+//            response.allHeaderFields.forEach({
+//                print("\($0.key)->\($0.value)")
+//            })
             if 200..<300 ~= response.statusCode {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let array = json as? [JSONDictionary] else { throw MastodonProtocolError.unexpectedJSONData }
@@ -117,27 +120,35 @@ public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
     public let method: HTTPMethod
     public let type: TimelineAPIType
     
-    public init(session: MastodonSession) {
+    public init(session: MastodonSession, limit: Int = 5) {
         self.session = session
         self.method = .get
         self.path = "/timelines/public"
-        self.parameters = [:]
+        self.parameters = ["limit": String(limit)]
         self.type = .update
     }
     
-    public init(session: MastodonSession, since_id id: Int) {
+    public init(session: MastodonSession, since_id id: Int, limit: Int = 5) {
         self.session = session
         self.method = .get
         self.path = "/timelines/public"
-        self.parameters = ["since_id": String(id)]
+        self.parameters = ["since_id": String(id), "limit": String(limit)]
         self.type = .sinceID
     }
     
-    public init(session: MastodonSession, max_id id: Int) {
+    public init(session: MastodonSession, max_id id: Int, limit: Int = 5) {
         self.session = session
         self.method = .get
         self.path = "/timelines/public"
-        self.parameters = ["max_id": String(id)]
+        self.parameters = ["max_id": String(id), "limit": String(limit)]
+        self.type = .maxID
+    }
+    
+    public init(session: MastodonSession, max_id: Int, since_id: Int, limit: Int = 5) {
+        self.session = session
+        self.method = .get
+        self.path = "/timelines/public"
+        self.parameters = ["max_id": String(max_id), "since_id": String(since_id), "limit": String(limit)]
         self.type = .maxID
     }
 }
