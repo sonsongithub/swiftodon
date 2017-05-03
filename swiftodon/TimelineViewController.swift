@@ -143,6 +143,7 @@ class TimelineViewController: UITableViewController {
 
         if let cell = cell as? TextViewCell, let content = timelineContent as? Content {
             cell.textView.attributedString = content.attributedString
+            cell.idLabel.text = String(content.status.id)
         }
 
         return cell
