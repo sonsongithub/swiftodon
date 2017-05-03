@@ -112,13 +112,12 @@ class TimelineController {
         let incommingStatus = try api.parse(data: data, response: response, error: error)
         var incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
         
-        guard incommingContents.count > 0 else { return }
-        
-        // Adding to the head of the existing array.
         if self.contents.count > 0 {
             guard let head = self.contents.first as? Content else { return }
             
             incommingContents = incommingContents.filter({$0.status.id > head.status.id})
+            
+            guard incommingContents.count > 0 else { return }
             
             guard let tail = incommingContents.last else { return }
             
@@ -135,6 +134,15 @@ class TimelineController {
         } else {
             self.contents = incommingContents + self.contents
         }
+    }
+    
+    func addToTail(api: TimelineAPI, data: Data?, response: URLResponse?, error: Error?) throws {
+        let incommingStatus = try api.parse(data: data, response: response, error: error)
+        var incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
+        guard let tail = self.contents.last as? Content else { return }
+        incommingContents = incommingContents.filter({$0.status.id < tail.status.id})
+        guard incommingContents.count > 0 else { return }
+        self.contents += incommingContents as [TimelineContent]
     }
     
     func insert(api: TimelineAPI, data: Data?, response: URLResponse?, error: Error?, insertIndex: Int) throws {
@@ -159,30 +167,6 @@ class TimelineController {
         }
         
         self.contents.insert(contentsOf: buff, at: insertIndex)
-        
-        
-        
-//        // Adding to the head of the existing array.
-//        if self.contents.count > 0 {
-//            guard let head = self.contents.first as? Content else { return }
-//            
-//            incommingContents = incommingContents.filter({$0.status.id > head.status.id})
-//            
-//            guard let tail = incommingContents.last else { return }
-//            
-//            print("----------")
-//            print(tail.status.id - head.status.id)
-//            if tail.status.id - head.status.id == 1 {
-//                self.contents = incommingContents + self.contents
-//            } else {
-//                var temp: [TimelineContent] = []
-//                temp = temp + incommingContents
-//                temp += [DownloadMore(maxID: tail.status.id, sinceID: head.status.id)]
-//                self.contents = temp + self.contents
-//            }
-//        } else {
-//            self.contents = incommingContents + self.contents
-//        }
     }
     
     func fetch(max_id: Int?, since_id: Int?, insertIndex: Int? = nil) throws {
@@ -200,12 +184,20 @@ class TimelineController {
                         try self.insert(api: api, data: data, response: response, error: error, insertIndex: insertIndex)
                     }
                 case (let max_id?, _):
-                    do {}
+                    try self.addToTail(api: api, data: data, response: response, error: error)
                 case (_, let since_id?):
                     try self.addToHead(api: api, data: data, response: response, error: error)
                 default:
                     try self.addToHead(api: api, data: data, response: response, error: error)
                 }
+                
+                if let first = self.contents.first as? Content {
+                    self.latest = first.status.id
+                }
+                if let last = self.contents.last as? Content {
+                    self.old = last.status.id
+                }
+                
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: nil)
 //                    NotificationCenter.default.post(name: TimelineControllerUpdateNotification, object: nil, userInfo: ["insertedPaths": insertedIndices])

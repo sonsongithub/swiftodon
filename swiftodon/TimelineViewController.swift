@@ -96,7 +96,7 @@ class TimelineViewController: UITableViewController {
     }
     
     override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//        pullupCheck(scrollView)
+        pullupCheck(scrollView)
         pulldownCheck(scrollView)
     }
     
