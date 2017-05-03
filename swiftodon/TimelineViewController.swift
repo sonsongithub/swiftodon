@@ -73,10 +73,9 @@ class TimelineViewController: UITableViewController {
     
     func pulldownCheck(_ scrollView: UIScrollView) {
         guard let controller = home else { return }
-        if scrollView.contentOffset.y + scrollView.contentInset.top < -64 {
+        if scrollView.contentOffset.y + scrollView.contentInset.top < -64 && scrollView.contentOffset.y < 0 {
             do {
                 try controller.getLatest()
-                print("trigger")
             } catch {
                 print(error)
             }
@@ -85,10 +84,9 @@ class TimelineViewController: UITableViewController {
     
     func pullupCheck(_ scrollView: UIScrollView) {
         guard let controller = home else { return }
-        if scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y < -64 {
+        if scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y < -64 && scrollView.contentOffset.y > 0 {
             do {
                 try controller.getOld()
-                print("trigger")
             } catch {
                 print(error)
             }
@@ -118,17 +116,6 @@ class TimelineViewController: UITableViewController {
 
         }
     }
-    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let controller = home else { return }
-//        if indexPath.row == controller.contents.count - 1 {
-//            do {
-//                try controller.getOld()
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let controller = home else { return 0 }
