@@ -148,7 +148,7 @@ class TimelineController {
         
         var buff: [TimelineContent] = []
         
-        incommingContents = incommingContents.filter({$0.status.id < tail.status.id && $0.status.id > head.status.id + 1})
+        incommingContents = incommingContents.filter({$0.status.id < tail.status.id && $0.status.id > head.status.id})
         buff += (incommingContents as [TimelineContent])
         
         guard incommingContents.count > 0 else { return }
