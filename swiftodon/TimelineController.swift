@@ -75,6 +75,12 @@ class TimelineController {
     var old: Int = 0
     var loading = false
     
+    public enum TimelineDownloadType {
+        case add2tail
+        case insert(index: Int)
+        case add2head
+    }
+
     init(session: MastodonSession, type: TimelineType) {
         self.session = session
         self.type = type
@@ -90,16 +96,16 @@ class TimelineController {
         try fetch(max_id: old, since_id: nil)
     }
     
-    func createAPI(max_id: Int?, since_id: Int?) -> TimelineAPI {
-        switch (max_id, since_id) {
-        case (let max_id?, let since_id?):
-            return TimelineAPI(session: session, max_id: max_id, since_id: since_id)
-        case (let max_id?, _):
-            return TimelineAPI(session: session, max_id: max_id)
-        case (_, let since_id?):
-            return TimelineAPI(session: session, since_id: since_id)
+    func createAPI(max_id: Int?, since_id: Int?, insertIndex: Int?) -> (TimelineAPI, TimelineDownloadType) {
+        switch (max_id, since_id, insertIndex) {
+        case (let max_id?, let since_id?, let insertIndex?):
+            return (TimelineAPI(session: session, max_id: max_id, since_id: since_id), .insert(index: insertIndex))
+        case (let max_id?, _, _):
+            return (TimelineAPI(session: session, max_id: max_id), .add2tail)
+        case (_, let since_id?, _):
+            return (TimelineAPI(session: session, since_id: since_id), .add2head)
         default:
-            return TimelineAPI(session: session)
+            return (TimelineAPI(session: session), .add2head)
         }
     }
     
@@ -108,26 +114,24 @@ class TimelineController {
         try fetch(max_id: nil, since_id: nil)
     }
     
-    func addToHead(api: TimelineAPI, data: Data?, response: URLResponse?, error: Error?) throws {
-        let incommingStatus = try api.parse(data: data, response: response, error: error)
-        var incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
+    func addToHead(incommingContents: [Content]) throws {
         
         if self.contents.count > 0 {
             guard let head = self.contents.first as? Content else { return }
             
-            incommingContents = incommingContents.filter({$0.status.id > head.status.id})
+            let buf = incommingContents.filter({$0.status.id > head.status.id})
             
-            guard incommingContents.count > 0 else { return }
+            guard buf.count > 0 else { return }
             
-            guard let tail = incommingContents.last else { return }
+            guard let tail = buf.last else { return }
             
             print("----------")
             print(tail.status.id - head.status.id)
             if tail.status.id - head.status.id == 1 {
-                self.contents = incommingContents + self.contents
+                self.contents = buf + self.contents
             } else {
                 var temp: [TimelineContent] = []
-                temp = temp + incommingContents
+                temp = temp + buf
                 temp += [DownloadMore(maxID: tail.status.id, sinceID: head.status.id)]
                 self.contents = temp + self.contents
             }
@@ -136,18 +140,16 @@ class TimelineController {
         }
     }
     
-    func addToTail(api: TimelineAPI, data: Data?, response: URLResponse?, error: Error?) throws {
-        let incommingStatus = try api.parse(data: data, response: response, error: error)
-        var incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
+    func addToTail(incommingContents: [Content]) throws {
         guard let tail = self.contents.last as? Content else { return }
-        incommingContents = incommingContents.filter({$0.status.id < tail.status.id})
-        guard incommingContents.count > 0 else { return }
-        self.contents += incommingContents as [TimelineContent]
+        let temp = incommingContents.filter({$0.status.id < tail.status.id})
+        guard temp.count > 0 else { return }
+        self.contents += temp as [TimelineContent]
     }
     
-    func insert(api: TimelineAPI, data: Data?, response: URLResponse?, error: Error?, insertIndex: Int) throws {
-        let incommingStatus = try api.parse(data: data, response: response, error: error)
-        var incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
+    func insert(incommingContents: [Content], insertIndex: Int) throws {
+        
+        var temp: [Content] = incommingContents
         
         guard let tail = self.contents[insertIndex - 1] as? Content else { return }
         guard let head = self.contents[insertIndex + 1] as? Content else { return }
@@ -156,12 +158,12 @@ class TimelineController {
         
         var buff: [TimelineContent] = []
         
-        incommingContents = incommingContents.filter({$0.status.id < tail.status.id && $0.status.id > head.status.id})
-        buff += (incommingContents as [TimelineContent])
+        temp = incommingContents.filter({$0.status.id < tail.status.id && $0.status.id > head.status.id})
+        buff += (temp as [TimelineContent])
         
         guard incommingContents.count > 0 else { return }
         
-        guard let incommingLast = incommingContents.last else { return }
+        guard let incommingLast = temp.last else { return }
         if incommingLast.status.id - head.status.id != 1 {
             buff += [DownloadMore(maxID: incommingLast.status.id, sinceID: head.status.id)]
         }
@@ -171,24 +173,23 @@ class TimelineController {
     
     func fetch(max_id: Int?, since_id: Int?, insertIndex: Int? = nil) throws {
         guard !loading else { return }
-        let api = createAPI(max_id: max_id, since_id: since_id)
+        let (api, type) = createAPI(max_id: max_id, since_id: since_id, insertIndex: insertIndex)
         let request = try api.request()
         loading = true
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             defer { self.loading = false }
             do {
+                let incommingStatus = try api.parse(data: data, response: response, error: error)
+                let incommingContents: [Content] = incommingStatus.map({ $0.createContent(constrainedWidth: self.textViewWidth) })
+                
                 // Adding new items at specfied index.
-                switch (max_id, since_id) {
-                case (let max_id?, let since_id?):
-                    if let insertIndex = insertIndex {
-                        try self.insert(api: api, data: data, response: response, error: error, insertIndex: insertIndex)
-                    }
-                case (let max_id?, _):
-                    try self.addToTail(api: api, data: data, response: response, error: error)
-                case (_, let since_id?):
-                    try self.addToHead(api: api, data: data, response: response, error: error)
-                default:
-                    try self.addToHead(api: api, data: data, response: response, error: error)
+                switch type {
+                case .add2head:
+                    try self.addToHead(incommingContents: incommingContents)
+                case .add2tail:
+                    try self.addToTail(incommingContents: incommingContents)
+                case .insert(let index):
+                    try self.insert(incommingContents: incommingContents, insertIndex: index)
                 }
                 
                 if let first = self.contents.first as? Content {

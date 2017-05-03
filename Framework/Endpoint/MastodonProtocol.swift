@@ -107,25 +107,17 @@ extension StatusListEndpoint {
     }
 }
 
-public enum TimelineAPIType {
-    case update
-    case sinceID
-    case maxID
-}
-
 public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
     public let path: String
     public var parameters: [String : String]
     public let session: MastodonSession
     public let method: HTTPMethod
-    public let type: TimelineAPIType
     
     public init(session: MastodonSession, limit: Int = 5) {
         self.session = session
         self.method = .get
         self.path = "/timelines/public"
         self.parameters = ["limit": String(limit)]
-        self.type = .update
     }
     
     public init(session: MastodonSession, since_id id: Int, limit: Int = 5) {
@@ -133,7 +125,6 @@ public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
         self.method = .get
         self.path = "/timelines/public"
         self.parameters = ["since_id": String(id), "limit": String(limit)]
-        self.type = .sinceID
     }
     
     public init(session: MastodonSession, max_id id: Int, limit: Int = 5) {
@@ -141,7 +132,6 @@ public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
         self.method = .get
         self.path = "/timelines/public"
         self.parameters = ["max_id": String(id), "limit": String(limit)]
-        self.type = .maxID
     }
     
     public init(session: MastodonSession, max_id: Int, since_id: Int, limit: Int = 5) {
@@ -149,6 +139,5 @@ public struct TimelineAPI: MastodonProtocol, StatusListEndpoint {
         self.method = .get
         self.path = "/timelines/public"
         self.parameters = ["max_id": String(max_id), "since_id": String(since_id), "limit": String(limit)]
-        self.type = .maxID
     }
 }
