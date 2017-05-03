@@ -132,7 +132,7 @@ class TimelineViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let controller = home else { return 0 }
-        return controller.contents[indexPath.row].height + 16
+        return controller.contents[indexPath.row].height + 49
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

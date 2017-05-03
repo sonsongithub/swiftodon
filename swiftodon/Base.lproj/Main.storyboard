@@ -60,19 +60,31 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5L-bf-F7Q" customClass="UZTextView" customModule="UZTextView">
-                                            <rect key="frame" x="8" y="8" width="359" height="158"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="126"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4K-rt-9vK">
+                                            <rect key="frame" x="8" y="142" width="359" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="btj-YA-zP4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="F4K-rt-9vK" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="MOe-7P-A8h"/>
+                                        <constraint firstItem="F4K-rt-9vK" firstAttribute="top" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="Q3W-29-9Hk"/>
                                         <constraint firstAttribute="trailing" secondItem="a5L-bf-F7Q" secondAttribute="trailing" constant="8" id="SVb-Kg-1v6"/>
-                                        <constraint firstAttribute="bottom" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="cCm-mp-0ur"/>
-                                        <constraint firstAttribute="bottom" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="hRY-cp-fqp"/>
+                                        <constraint firstAttribute="bottom" secondItem="F4K-rt-9vK" secondAttribute="bottom" constant="8" id="YAP-Hg-O1y"/>
+                                        <constraint firstAttribute="trailing" secondItem="F4K-rt-9vK" secondAttribute="trailing" constant="8" id="lSr-7e-A17"/>
                                         <constraint firstItem="a5L-bf-F7Q" firstAttribute="top" secondItem="yYL-9f-GRD" secondAttribute="top" constant="8" id="p5F-ac-g0o"/>
                                         <constraint firstItem="a5L-bf-F7Q" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="yjs-lb-dNM"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="idLabel" destination="F4K-rt-9vK" id="VjF-MB-Mr4"/>
                                     <outlet property="textView" destination="a5L-bf-F7Q" id="WuN-o6-NY2"/>
                                 </connections>
                             </tableViewCell>

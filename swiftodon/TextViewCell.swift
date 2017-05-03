@@ -11,6 +11,7 @@ import UZTextView
 
 class TextViewCell: UITableViewCell {
     @IBOutlet var textView: UZTextView!
+    @IBOutlet var idLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
