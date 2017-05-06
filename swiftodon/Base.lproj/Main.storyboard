@@ -60,11 +60,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5L-bf-F7Q" customClass="UZTextView" customModule="UZTextView">
-                                            <rect key="frame" x="8" y="8" width="359" height="126"/>
+                                            <rect key="frame" x="64" y="8" width="303" height="126"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4K-rt-9vK">
-                                            <rect key="frame" x="8" y="142" width="359" height="25"/>
+                                            <rect key="frame" x="80" y="142" width="287" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="btj-YA-zP4"/>
                                             </constraints>
@@ -72,18 +72,29 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-SG-ub5">
+                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="7ON-Ij-FPe"/>
+                                                <constraint firstAttribute="width" constant="48" id="FWY-ud-PCH"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="F4K-rt-9vK" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="MOe-7P-A8h"/>
+                                        <constraint firstItem="F4K-rt-9vK" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="80" id="MOe-7P-A8h"/>
                                         <constraint firstItem="F4K-rt-9vK" firstAttribute="top" secondItem="a5L-bf-F7Q" secondAttribute="bottom" constant="8" id="Q3W-29-9Hk"/>
                                         <constraint firstAttribute="trailing" secondItem="a5L-bf-F7Q" secondAttribute="trailing" constant="8" id="SVb-Kg-1v6"/>
                                         <constraint firstAttribute="bottom" secondItem="F4K-rt-9vK" secondAttribute="bottom" constant="8" id="YAP-Hg-O1y"/>
+                                        <constraint firstItem="XfO-SG-ub5" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="eJP-AK-Lmi"/>
                                         <constraint firstAttribute="trailing" secondItem="F4K-rt-9vK" secondAttribute="trailing" constant="8" id="lSr-7e-A17"/>
+                                        <constraint firstItem="a5L-bf-F7Q" firstAttribute="leading" secondItem="XfO-SG-ub5" secondAttribute="trailing" constant="8" id="mws-Rf-RHj"/>
                                         <constraint firstItem="a5L-bf-F7Q" firstAttribute="top" secondItem="yYL-9f-GRD" secondAttribute="top" constant="8" id="p5F-ac-g0o"/>
-                                        <constraint firstItem="a5L-bf-F7Q" firstAttribute="leading" secondItem="yYL-9f-GRD" secondAttribute="leading" constant="8" id="yjs-lb-dNM"/>
+                                        <constraint firstItem="XfO-SG-ub5" firstAttribute="top" secondItem="yYL-9f-GRD" secondAttribute="top" constant="8" id="v8w-hi-gdG"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="iconImageButton" destination="XfO-SG-ub5" id="n1w-GG-aCB"/>
                                     <outlet property="idLabel" destination="F4K-rt-9vK" id="VjF-MB-Mr4"/>
                                     <outlet property="textView" destination="a5L-bf-F7Q" id="WuN-o6-NY2"/>
                                 </connections>

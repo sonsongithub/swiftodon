@@ -42,7 +42,7 @@ class TimelineViewController: UITableViewController {
                 home = TimelineController(session: list[0], type: .union)
                 local = TimelineController(session: list[0], type: .local)
                 union = TimelineController(session: list[0], type: .union)
-                home?.textViewWidth = self.view.frame.size.width - 16
+                home?.textViewWidth = self.view.frame.size.width - 72
                 try home?.update()
             }
         } catch {
@@ -120,7 +120,7 @@ class TimelineViewController: UITableViewController {
         
         switch controller.contents[indexPath.row] {
         case (let content as Content):
-            return content.height + 49
+            return content.height + 49 > 80 ? content.height + 49 : 80
         default:
             return 44
         }
@@ -135,6 +135,7 @@ class TimelineViewController: UITableViewController {
         if let cell = cell as? TextViewCell, let content = timelineContent as? Content {
             cell.textView.attributedString = content.attributedString
             cell.idLabel.text = String(content.status.id)
+            cell.iconImageURL = URL(string: content.status.account.avatar)
         } else if let cell = cell as? LoadingCell {
             cell.indicatorView.startAnimating()
         }

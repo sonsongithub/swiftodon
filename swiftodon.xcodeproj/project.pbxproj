@@ -53,6 +53,7 @@
 		1486A7871EB35CA600D54B83 /* MiniKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1486A77F1EB35C9600D54B83 /* MiniKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1486A7881EB35CA600D54B83 /* UZTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1486A7801EB35C9600D54B83 /* UZTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14CA4EAF1EBA87BA00C2196A /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4EAE1EBA87BA00C2196A /* LoadingCell.swift */; };
+		14CA4EBB1EBAA3C500C2196A /* CommonCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA4EB91EBAA3BB00C2196A /* CommonCrypto.swift */; };
 		14CFAD6D1EB1FCBA00BCAF18 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */; };
 		14D56EEF1EB1B7B900B0D72C /* MastodonSession+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D56EED1EB1B64800B0D72C /* MastodonSession+Account.swift */; };
 		14D56EF21EB1BA6700B0D72C /* MastodonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D56EF11EB1BA6700B0D72C /* MastodonProtocol.swift */; };
@@ -148,6 +149,7 @@
 		1486A77F1EB35C9600D54B83 /* MiniKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniKeychain.framework; path = Carthage/Build/iOS/MiniKeychain.framework; sourceTree = "<group>"; };
 		1486A7801EB35C9600D54B83 /* UZTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UZTextView.framework; path = Carthage/Build/iOS/UZTextView.framework; sourceTree = "<group>"; };
 		14CA4EAE1EBA87BA00C2196A /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		14CA4EB91EBAA3BB00C2196A /* CommonCrypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCrypto.swift; sourceTree = "<group>"; };
 		14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListViewController.swift; sourceTree = "<group>"; };
 		14D56EED1EB1B64800B0D72C /* MastodonSession+Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MastodonSession+Account.swift"; sourceTree = "<group>"; };
 		14D56EF11EB1BA6700B0D72C /* MastodonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonProtocol.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		1482E1381EB1770F00EFEB62 /* swiftodon */ = {
 			isa = PBXGroup;
 			children = (
+				14CA4EB91EBAA3BB00C2196A /* CommonCrypto.swift */,
 				147EA8571EB36076001A0B44 /* MainPageViewController.swift */,
 				14CFAD6B1EB1FCB500BCAF18 /* AccountListViewController.swift */,
 				1456B92A1EB2C83B00F3E410 /* TimelineViewController.swift */,
@@ -317,6 +320,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1482E1481EB1770F00EFEB62 /* Build configuration list for PBXNativeTarget "swiftodon-application" */;
 			buildPhases = (
+				1416F8701EBB34220051982B /* ShellScript */,
 				1482E1321EB1770F00EFEB62 /* Sources */,
 				1482E1331EB1770F00EFEB62 /* Frameworks */,
 				1482E1341EB1770F00EFEB62 /* Resources */,
@@ -453,6 +457,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1416F8701EBB34220051982B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CommonCrypto.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HTMLSpecialCharacters.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MiniKeychain.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UZTextView.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1482E1321EB1770F00EFEB62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -465,6 +489,7 @@
 				14CA4EAF1EBA87BA00C2196A /* LoadingCell.swift in Sources */,
 				147EA8581EB36076001A0B44 /* MainPageViewController.swift in Sources */,
 				1456B92F1EB2CA0700F3E410 /* TimelineController.swift in Sources */,
+				14CA4EBB1EBAA3C500C2196A /* CommonCrypto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,9 +597,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = JP866VWWSD;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -622,9 +649,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = JP866VWWSD;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -649,6 +678,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "swiftodon-application.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JP866VWWSD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -658,6 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -668,6 +700,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "swiftodon-application.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = JP866VWWSD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -677,6 +711,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -685,7 +720,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = JP866VWWSD;
@@ -701,6 +737,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon.framework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -714,7 +751,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = JP866VWWSD;
@@ -730,6 +768,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sonson.swiftodon.framework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
